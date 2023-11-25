@@ -5,6 +5,7 @@ from telegram.ext import *
 import random , logging , html , char , datetime , pymongo , asyncio , time , monster , os , PIL , pytz
 from pymongo.mongo_client import MongoClient
 from bson.objectid import ObjectId
+from datetime import time as tyyme
 from pymongo.server_api import ServerApi
 from PIL import Image, ImageDraw, ImageFont
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
@@ -1927,6 +1928,7 @@ def status_plate(update,context):
         user_info=user_data[1].find_one({'_id': ObjectId(user_obj_id)})['user_info']
         date=user_data[1].find_one({'_id': ObjectId(user_obj_id)})['date']
         join_date=f"{date}"
+        print(join_date.split(" ")[0])
         background=user_data[1].find_one({'_id': ObjectId(user_obj_id)})['user_info']['pfp']
         if background==None:
             img=Image.open("STATUS.png")
@@ -5457,7 +5459,7 @@ def passer_pvp(update,context):
             if user_1_id in insiders :
                 insiders.remove(user_1_id)
             if user_2_id in insiders :
-                insiders.remove(user_2_id)
+                insiders.remove(user_2_id)``
             return
         else:
             text1+=f"*\n{char_of_1[f'team_player_{user_1_player}']['name']} Dealt {char_1_dmg} to {char_of_2[f'team_player_{user_2_player}']['name']}*"
