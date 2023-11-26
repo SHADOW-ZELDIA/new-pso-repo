@@ -5459,7 +5459,7 @@ def passer_pvp(update,context):
             if user_1_id in insiders :
                 insiders.remove(user_1_id)
             if user_2_id in insiders :
-                insiders.remove(user_2_id)``
+                insiders.remove(user_2_id)
             return
         else:
             text1+=f"*\n{char_of_1[f'team_player_{user_1_player}']['name']} Dealt {char_1_dmg} to {char_of_2[f'team_player_{user_2_player}']['name']}*"
