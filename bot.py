@@ -5786,9 +5786,34 @@ def pvp_swap_mou(update,context):
             cd[message_id]['pvp_player_no']=player_no
             return
     elif query.data.split("_")[1] == "saprad":
-        print("okay")
-
-
+        if int(query.data.split("_")[-1]) == user_1_id:
+            new_player_1=int(query.data.split("_")[2])
+            text1=f"[PLAYER 1](tg://user?id={users['user_1_id']})* swapped {char_of_1[f'team_player_{new_player_1}']['name']} with {char_of_1[f'team_player_{user_1_player}']['name']}*"
+            user_1_player=new_player_1
+            keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_2_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_2_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_2_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_2_id}_{user_1_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_2_id}_{user_1_id}')]]
+            message=query.message.edit_text(text1+f"\n\n[PLAYER 2](tg://user?id={users['user_2_id']}) *choose the move*",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
+            message_id = message.message_id
+            cd[message_id] = {}
+            cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+            cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+            cd[message_id]['passive']=user_passive
+            cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+            cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
+            return
+        elif int(query.data.split("_")[-1]) == user_2_id:
+            new_player_2=int(move[f"user_{user_2_id}_move"].split("_")[1])
+            text1=f"\n[PLAYER 2](tg://user?id={users['user_2_id']})* swapped {char_of_2[f'team_player_{new_player_2}']['name']} with {char_of_2[f'team_player_{user_2_player}']['name']}*"
+            user_2_player=new_player_2
+            keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_2_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_2_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_2_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_2_id}_{user_1_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_2_id}_{user_1_id}')]]
+            message=query.message.edit_text(text1+f"\n\n[PLAYER 2](tg://user?id={users['user_2_id']}) *choose the move*",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
+            message_id = message.message_id
+            cd[message_id] = {}
+            cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+            cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+            cd[message_id]['passive']=user_passive
+            cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+            cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
+            return
 
 def recover_user(update,context):
     user=update.effective_user
