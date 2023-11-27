@@ -608,7 +608,7 @@ def event_cmd(update,context):
             return
         else:
             if user.id not in [1864257459]:
-                keyboard=[[InlineKeyboardButton('REFFERAL',callback_data=f'reffer_maker'),InlineKeyboardButton('DAILY LOGIN',callback_data=f'claimdaily')],[InlineKeyboardButton('STORY EVENT',callback_data=f'story_event')]]
+                keyboard=[[InlineKeyboardButton('REFFERAL',callback_data=f'reffer_maker'),InlineKeyboardButton('DAILY LOGIN',callback_data=f'claimdaily')],[InlineKeyboardButton('QUESTS',callback_data=f'quests_event')]]
                 update.message.reply_text("*SELECT THE EVENT WHICH U WANT TO ENTER*",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                 return
             keyboard=[[InlineKeyboardButton('REFFERAL',callback_data=f'reffer_maker'),InlineKeyboardButton('DAILY LOGIN',callback_data=f'claimdaily')],[InlineKeyboardButton('STORY EVENT',callback_data=f'story_event')]]
@@ -625,7 +625,7 @@ def back_to_event(update,context):
             return
     user=update.effective_user
     query=update.callback_query
-    keyboard=[[InlineKeyboardButton('REFFERAL',callback_data=f'reffer_maker'),InlineKeyboardButton('DAILY LOGIN',callback_data=f'claimdaily')],[InlineKeyboardButton('STORY EVENT',callback_data=f'story_event')]]
+    keyboard=[[InlineKeyboardButton('REFFERAL',callback_data=f'reffer_maker'),InlineKeyboardButton('DAILY LOGIN',callback_data=f'claimdaily')],[InlineKeyboardButton('QUESTS',callback_data=f'quests_event')]]
     query.message.edit_text("*SELECT THE EVENT WHICH U WANT TO ENTER*",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
     return
 
