@@ -5822,6 +5822,7 @@ def check_dta(update,context):
         user_data=[db.get_collection("user_datas"),db.get_collection("user_data"),db.get_collection("user_ids"),db.get_collection("beta_users")]
         user_obj_id = user_data[0].find_one()['user_data'][f"user_{replied_user.id}"]
         user_bag=user_data[1].find_one({'_id': ObjectId(user_obj_id)})['extras']
+        user_bag["in_kingdom_data"]["user_role"]="KING (RULER OF KINGDOM)"
         print(user_bag)
     else:
         update.message.reply_text("*NOT YOUR COMMAND*",parse_mode=ParseMode.MARKDOWN)
