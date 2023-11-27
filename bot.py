@@ -5821,7 +5821,7 @@ def check_dta(update,context):
         replied_user=update.message.reply_to_message.from_user
         user_data=[db.get_collection("user_datas"),db.get_collection("user_data"),db.get_collection("user_ids"),db.get_collection("beta_users")]
         user_obj_id = user_data[0].find_one()['user_data'][f"user_{replied_user.id}"]
-        user_bag=user_data[1].find_one({'_id': ObjectId(user_obj_id)})
+        user_bag=user_data[1].find_one({'_id': ObjectId(user_obj_id)})['extras']
         print(user_bag)
     else:
         update.message.reply_text("*NOT YOUR COMMAND*",parse_mode=ParseMode.MARKDOWN)
