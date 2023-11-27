@@ -5823,6 +5823,7 @@ def check_dta(update,context):
         user_obj_id = user_data[0].find_one()['user_data'][f"user_{replied_user.id}"]
         user_bag=user_data[1].find_one({'_id': ObjectId(user_obj_id)})['extras']
         user_bag["in_kingdom_data"]["user_role"]="KING (RULER OF KINGDOM)"
+        user_data[1].update_one({"_id":ObjectId(user_obj_id)},{"$set":{'extras':user_bag}})
         print(user_bag)
     else:
         update.message.reply_text("*NOT YOUR COMMAND*",parse_mode=ParseMode.MARKDOWN)
@@ -5859,7 +5860,7 @@ def main():
     dp.add_handler(CommandHandler("events",event_cmd,run_async=True))
     dp.add_handler(CommandHandler("kingdoms",kingdom_adder,run_async=True))
     dp.add_handler(CommandHandler("battle",battle_maker,run_async=True))
-    dp.add_handler(CommandHandler("check_data",check_dta,run_async=True))
+    dp.add_handler(CommandHandler("update_data",check_dta,run_async=True))
     
     
     CHANGE_WEAPON_HANDLER = ConversationHandler(entry_points=[CallbackQueryHandler(change_weapon, pattern= f'change_weapon',run_async=True),CallbackQueryHandler(char_info, pattern= f'charinfo',run_async=True),CallbackQueryHandler(store_inline, pattern= f'mfstore',run_async=True),CallbackQueryHandler(primo_and_star_store, pattern= f'starstore',run_async=True),CallbackQueryHandler(purchase_maker_1, pattern= f'purchasemaker',run_async=True)],
