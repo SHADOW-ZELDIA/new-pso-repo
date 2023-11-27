@@ -5815,13 +5815,13 @@ def pvp_swap_mou(update,context):
             cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
             return
 
-def recover_user(update,context):
+def check_dta(update,context):
     user=update.effective_user
     if user.id == 1864257459:
-        message=int(update.message.text.split(" ")[-1])
+        replied_user=update.message.reply_to_message.from_user
         user_data=[db.get_collection("user_datas"),db.get_collection("user_data"),db.get_collection("user_ids"),db.get_collection("beta_users")]
-        user_obj_id = user_data[0].find_one()['user_data'][f"user_{message}"]
-        print(user_obj_id)
+        user_obj_id = user_data[0].find_one()['user_data'][f"user_{replied_user.id}"]
+        user_bag=user_data[1].find_one({'_id': ObjectId(user_obj_id)})
     else:
         update.message.reply_text("*NOT YOUR COMMAND*",parse_mode=ParseMode.MARKDOWN)
 
@@ -5857,7 +5857,7 @@ def main():
     dp.add_handler(CommandHandler("events",event_cmd,run_async=True))
     dp.add_handler(CommandHandler("kingdoms",kingdom_adder,run_async=True))
     dp.add_handler(CommandHandler("battle",battle_maker,run_async=True))
-    dp.add_handler(CommandHandler("recover",recover_user,run_async=True))
+    dp.add_handler(CommandHandler("check_data",check_dta,run_async=True))
     
     
     CHANGE_WEAPON_HANDLER = ConversationHandler(entry_points=[CallbackQueryHandler(change_weapon, pattern= f'change_weapon',run_async=True),CallbackQueryHandler(char_info, pattern= f'charinfo',run_async=True),CallbackQueryHandler(store_inline, pattern= f'mfstore',run_async=True),CallbackQueryHandler(primo_and_star_store, pattern= f'starstore',run_async=True),CallbackQueryHandler(purchase_maker_1, pattern= f'purchasemaker',run_async=True)],
