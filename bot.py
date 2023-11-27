@@ -5,7 +5,6 @@ from telegram.ext import *
 import random , logging , html , char , datetime , pymongo , asyncio , time , monster , os , PIL , pytz
 from pymongo.mongo_client import MongoClient
 from bson.objectid import ObjectId
-from datetime import time as tyyme
 from pymongo.server_api import ServerApi
 from PIL import Image, ImageDraw, ImageFont
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
@@ -5253,26 +5252,21 @@ def passer_pvp(update,context):
             char_of_2[f'team_player_{user_2_player}']['hp']-=char_1_dmg
             text+=f"*\n{char_of_1[f'team_player_{user_1_player}']['name']} Dealt {char_1_dmg} to {char_of_2[f'team_player_{user_2_player}']['name']}*"
             if char_of_2[f'team_player_{user_2_player}']['hp']<1:
-                query.message.edit_text(text+f"\n\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\nAND [PLAYER 2](tg://user?id={user_2_id}) is defeated by [PLAYER 1](tg://user?id={user_1_id})",parse_mode=ParseMode.MARKDOWN)
-                if user_1_id in insiders :
-                    insiders.remove(user_1_id)
-                if user_2_id in insiders :
-                    insiders.remove(user_2_id)
-                return
-            else:
-                char_of_1[f'team_player_{user_1_player}']['hp']-=char_2_dmg
-                if char_of_1[f'team_player_{user_1_player}']['hp']<1:
-                    query.message.edit_text(text+f"\n\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\nAND [PLAYER 1](tg://user?id={user_1_id}) is defeated by [PLAYER 2](tg://user?id={user_2_id})",parse_mode=ParseMode.MARKDOWN)
+                char_of_2[f'team_player_{user_2_player}']['dead']='True'
+                keyboard2=[]
+                for p in range(4):
+                    if char_of_2[f'team_player_{p+1}']['name']!='None':
+                        if char_of_2[f'team_player_{p+1}']['dead']=='False':
+                            if char_of_2[f'team_player_{p+1}']['name']!=char_of_2[f'team_player_{user_2_player}']['name']:
+                                keyboard1.append([InlineKeyboardButton(f"{char_of_2[f'team_player_{p+1}']['name']}",callback_data=f'pvpmuu_saprad_{p+1}_{user_2_id}')])    
+                if len(keyboard1) < 1 :
+                    query.message.edit_text(text+f"\n\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\nAND [PLAYER 2](tg://user?id={user_2_id}) is defeated by [PLAYER 1](tg://user?id={user_1_id})",parse_mode=ParseMode.MARKDOWN)
                     if user_1_id in insiders :
                         insiders.remove(user_1_id)
                     if user_2_id in insiders :
                         insiders.remove(user_2_id)
                     return
-                text+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Dealt {char_2_dmg} to {char_of_1[f'team_player_{user_1_player}']['name']}*"
-                moves=charamoves(char_of_1[f"team_player_{user_1_player}"])
-                text1=f"\n\n[PLAYER 1](tg://user?id={users['user_1_id']}) :  *{char_of_1[f'team_player_{user_1_player}']['name']} [ {char_of_1[f'team_player_{user_1_player}']['element']} ]*\n`{char_of_1[f'team_player_{user_1_player}']['name']} HP : `*{char_of_1[f'team_player_{user_1_player}']['hp']}*\n\n[PLAYER 2](tg://user?id={users['user_2_id']}) :  *{char_of_2[f'team_player_{user_2_player}']['name']} [ {char_of_2[f'team_player_{user_2_player}']['element']} ]*\n`{char_of_2[f'team_player_{user_2_player}']['name']} HP : `*{char_of_2[f'team_player_{user_2_player}']['hp']}*"
-                keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_1_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_1_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_1_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_1_id}_{user_2_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_1_id}_{user_2_id}')]]
-                message=query.message.edit_text(text+text1+f"\n\n[PLAYER 1](tg://user?id={users['user_1_id']}) *choose the move*",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
+                message=query.message.edit_text(text+f"\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\n[PLAYER 2](tg://user?id={user_2_id}) Choose your next character",InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
                 message_id = message.message_id
                 cd[message_id] = {}
                 cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
@@ -5281,24 +5275,98 @@ def passer_pvp(update,context):
                 cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
                 cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
                 return
+            else:
+                char_of_1[f'team_player_{user_1_player}']['hp']-=char_2_dmg
+                if char_of_1[f'team_player_{user_1_player}']['hp']<1:
+                    char_of_1[f'team_player_{user_1_player}']['dead']='True'
+                    keyboard1=[]
+                    for s in range(4):
+                        if char_of_1[f'team_player_{s+1}']['name']!='None':
+                            if char_of_1[f'team_player_{s+1}']['dead']=='False':
+                                if char_of_1[f'team_player_{s+1}']['name']!=char_of_1[f'team_player_{user_1_player}']['name']:
+                                    keyboard1.append([InlineKeyboardButton(f"{char_of_1[f'team_player_{s+1}']['name']}",callback_data=f'pvpmuu_saprad_{s+1}_{user_1_id}')])    
+                    if len(keyboard1) < 1 :
+                        query.message.edit_text(text+f"\n\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\nAND [PLAYER 1](tg://user?id={user_1_id}) is defeated by [PLAYER 2](tg://user?id={user_2_id})",parse_mode=ParseMode.MARKDOWN)
+                        if user_1_id in insiders :
+                            insiders.remove(user_1_id)
+                        if user_2_id in insiders :
+                            insiders.remove(user_2_id)
+                        return
+                    message=query.message.edit_text(text+f"\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\n[PLAYER 1](tg://user?id={user_1_id}) Choose your next character",InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
+                    message_id = message.message_id
+                    cd[message_id] = {}
+                    cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                    cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                    cd[message_id]['passive']=user_passive
+                    cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                    cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
+                    return
+                else:
+                    text+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Dealt {char_2_dmg} to {char_of_1[f'team_player_{user_1_player}']['name']}*"
+                    moves=charamoves(char_of_1[f"team_player_{user_1_player}"])
+                    text1=f"\n\n[PLAYER 1](tg://user?id={users['user_1_id']}) :  *{char_of_1[f'team_player_{user_1_player}']['name']} [ {char_of_1[f'team_player_{user_1_player}']['element']} ]*\n`{char_of_1[f'team_player_{user_1_player}']['name']} HP : `*{char_of_1[f'team_player_{user_1_player}']['hp']}*\n\n[PLAYER 2](tg://user?id={users['user_2_id']}) :  *{char_of_2[f'team_player_{user_2_player}']['name']} [ {char_of_2[f'team_player_{user_2_player}']['element']} ]*\n`{char_of_2[f'team_player_{user_2_player}']['name']} HP : `*{char_of_2[f'team_player_{user_2_player}']['hp']}*"
+                    keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_1_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_1_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_1_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_1_id}_{user_2_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_1_id}_{user_2_id}')]]
+                    message=query.message.edit_text(text+text1+f"\n\n[PLAYER 1](tg://user?id={users['user_1_id']}) *choose the move*",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
+                    message_id = message.message_id
+                    cd[message_id] = {}
+                    cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                    cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                    cd[message_id]['passive']=user_passive
+                    cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                    cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
+                    return
         else:
             char_of_1[f'team_player_{user_1_player}']['hp']-=char_2_dmg
             text+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Dealt {char_2_dmg} to {char_of_1[f'team_player_{user_1_player}']['name']}*"
             if char_of_1[f'team_player_{user_1_player}']['hp']<1:
-                query.message.edit_text(text+f"\n\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\nAND [PLAYER 1](tg://user?id={user_1_id}) is defeated by [PLAYER 2](tg://user?id={user_2_id})",parse_mode=ParseMode.MARKDOWN)
-                if user_1_id in insiders :
-                    insiders.remove(user_1_id)
-                if user_2_id in insiders :
-                    insiders.remove(user_2_id)
-                return
-            else:
-                char_of_2[f'team_player_{user_2_player}']['hp']-=char_1_dmg
-                if char_of_2[f'team_player_{user_2_player}']['hp']<1:
-                    query.message.edit_text(text+f"\n\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\nAND [PLAYER 2](tg://user?id={user_2_id}) is defeated by [PLAYER 1](tg://user?id={user_1_id})",parse_mode=ParseMode.MARKDOWN)
+                char_of_1[f'team_player_{user_1_player}']['dead']='True'
+                keyboard1=[]
+                for s in range(4):
+                    if char_of_1[f'team_player_{s+1}']['name']!='None':
+                        if char_of_1[f'team_player_{s+1}']['dead']=='False':
+                            if char_of_1[f'team_player_{s+1}']['name']!=char_of_1[f'team_player_{user_1_player}']['name']:
+                                keyboard1.append([InlineKeyboardButton(f"{char_of_1[f'team_player_{s+1}']['name']}",callback_data=f'pvpmuu_saprad_{s+1}_{user_1_id}')])    
+                if len(keyboard1) < 1 :
+                    query.message.edit_text(text+f"\n\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\nAND [PLAYER 1](tg://user?id={user_1_id}) is defeated by [PLAYER 2](tg://user?id={user_2_id})",parse_mode=ParseMode.MARKDOWN)
                     if user_1_id in insiders :
                         insiders.remove(user_1_id)
                     if user_2_id in insiders :
                         insiders.remove(user_2_id)
+                    return
+                message=query.message.edit_text(text+f"\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\n[PLAYER 1](tg://user?id={user_1_id}) Choose your next character",InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
+                message_id = message.message_id
+                cd[message_id] = {}
+                cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                cd[message_id]['passive']=user_passive
+                cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
+                return
+            else:
+                char_of_2[f'team_player_{user_2_player}']['hp']-=char_1_dmg
+                if char_of_2[f'team_player_{user_2_player}']['hp']<1:
+                    char_of_2[f'team_player_{user_2_player}']['dead']='True'
+                    keyboard2=[]
+                    for p in range(4):
+                        if char_of_2[f'team_player_{p+1}']['name']!='None':
+                            if char_of_2[f'team_player_{p+1}']['dead']=='False':
+                                if char_of_2[f'team_player_{p+1}']['name']!=char_of_2[f'team_player_{user_2_player}']['name']:
+                                    keyboard1.append([InlineKeyboardButton(f"{char_of_2[f'team_player_{p+1}']['name']}",callback_data=f'pvpmuu_saprad_{p+1}_{user_2_id}')])    
+                    if len(keyboard1) < 1 :
+                        query.message.edit_text(text+f"\n\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\nAND [PLAYER 2](tg://user?id={user_2_id}) is defeated by [PLAYER 1](tg://user?id={user_1_id})",parse_mode=ParseMode.MARKDOWN)
+                        if user_1_id in insiders :
+                            insiders.remove(user_1_id)
+                        if user_2_id in insiders :
+                            insiders.remove(user_2_id)
+                        return
+                    message=query.message.edit_text(text+f"\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\n[PLAYER 2](tg://user?id={user_2_id}) Choose your next character",InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
+                    message_id = message.message_id
+                    cd[message_id] = {}
+                    cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                    cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                    cd[message_id]['passive']=user_passive
+                    cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                    cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
                     return
                 text+=f"*\n{char_of_1[f'team_player_{user_1_player}']['name']} Dealt {char_1_dmg} to {char_of_2[f'team_player_{user_2_player}']['name']}*"
                 moves=charamoves(char_of_2[f"team_player_{user_2_player}"])
@@ -5335,11 +5403,28 @@ def passer_pvp(update,context):
             recoil_dmg=round(1.5*char_2_dmg)
             char_of_2[f'team_player_{user_2_player}']['hp']-=recoil_dmg
             if char_of_2[f'team_player_{user_2_player}']['hp']<1:
-                query.message.edit_text(text+f"\n\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\nAND [PLAYER 2](tg://user?id={user_2_id}) is defeated by [PLAYER 1](tg://user?id={user_1_id})",parse_mode=ParseMode.MARKDOWN)
-                if user_1_id in insiders :
-                    insiders.remove(user_1_id)
-                if user_2_id in insiders :
-                    insiders.remove(user_2_id)
+                char_of_2[f'team_player_{user_2_player}']['dead']='True'
+                keyboard2=[]
+                for p in range(4):
+                    if char_of_2[f'team_player_{p+1}']['name']!='None':
+                        if char_of_2[f'team_player_{p+1}']['dead']=='False':
+                            if char_of_2[f'team_player_{p+1}']['name']!=char_of_2[f'team_player_{user_2_player}']['name']:
+                                keyboard1.append([InlineKeyboardButton(f"{char_of_2[f'team_player_{p+1}']['name']}",callback_data=f'pvpmuu_saprad_{p+1}_{user_2_id}')])    
+                if len(keyboard1) < 1 :
+                    query.message.edit_text(text+f"\n\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\nAND [PLAYER 2](tg://user?id={user_2_id}) is defeated by [PLAYER 1](tg://user?id={user_1_id})",parse_mode=ParseMode.MARKDOWN)
+                    if user_1_id in insiders :
+                        insiders.remove(user_1_id)
+                    if user_2_id in insiders :
+                        insiders.remove(user_2_id)
+                    return
+                message=query.message.edit_text(text+f"\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\n[PLAYER 2](tg://user?id={user_2_id}) Choose your next character",InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
+                message_id = message.message_id
+                cd[message_id] = {}
+                cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                cd[message_id]['passive']=user_passive
+                cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
                 return
             else:
                 moves=charamoves(char_of_1[f"team_player_{user_1_player}"])
@@ -5358,11 +5443,28 @@ def passer_pvp(update,context):
             char_of_1[f'team_player_{user_1_player}']['hp']-=char_2_dmg
             text+=f"*\n{char_of_1[f'team_player_{user_1_player}']['name']} Tried to Dodge {char_of_2[f'team_player_{user_2_player}']['name']} but Failed\nAND got Hit by {char_of_2[f'team_player_{user_2_player}']['name']} Attack*"
             if char_of_1[f'team_player_{user_1_player}']['hp']<1:
-                query.message.edit_text(text+f"\n\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\nAND [PLAYER 1](tg://user?id={user_1_id}) is defeated by [PLAYER 2](tg://user?id={user_2_id})",parse_mode=ParseMode.MARKDOWN)
-                if user_1_id in insiders :
-                    insiders.remove(user_1_id)
-                if user_2_id in insiders :
-                    insiders.remove(user_2_id)
+                char_of_1[f'team_player_{user_1_player}']['dead']='True'
+                keyboard1=[]
+                for s in range(4):
+                    if char_of_1[f'team_player_{s+1}']['name']!='None':
+                        if char_of_1[f'team_player_{s+1}']['dead']=='False':
+                            if char_of_1[f'team_player_{s+1}']['name']!=char_of_1[f'team_player_{user_1_player}']['name']:
+                                keyboard1.append([InlineKeyboardButton(f"{char_of_1[f'team_player_{s+1}']['name']}",callback_data=f'pvpmuu_saprad_{s+1}_{user_1_id}')])    
+                if len(keyboard1) < 1 :
+                    query.message.edit_text(text+f"\n\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\nAND [PLAYER 1](tg://user?id={user_1_id}) is defeated by [PLAYER 2](tg://user?id={user_2_id})",parse_mode=ParseMode.MARKDOWN)
+                    if user_1_id in insiders :
+                        insiders.remove(user_1_id)
+                    if user_2_id in insiders :
+                        insiders.remove(user_2_id)
+                    return
+                message=query.message.edit_text(text+f"\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\n[PLAYER 1](tg://user?id={user_1_id}) Choose your next character",InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
+                message_id = message.message_id
+                cd[message_id] = {}
+                cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                cd[message_id]['passive']=user_passive
+                cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
                 return
             else:
                 moves=charamoves(char_of_1[f"team_player_{user_1_player}"])
@@ -5386,11 +5488,28 @@ def passer_pvp(update,context):
             char_of_1[f'team_player_{user_1_player}']['hp']-=recoil_dmg
             text+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} dodged {char_of_1[f'team_player_{user_1_player}']['name']} Attack And\nThe {char_of_1[f'team_player_{user_1_player}']['name']} got hit by {recoil_dmg} DMG*"
             if char_of_1[f'team_player_{user_1_player}']['hp']<1:
-                query.message.edit_text(text+f"\n\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\nAND [PLAYER 1](tg://user?id={user_1_id}) is defeated by [PLAYER 2](tg://user?id={user_2_id})",parse_mode=ParseMode.MARKDOWN)
-                if user_1_id in insiders :
-                    insiders.remove(user_1_id)
-                if user_2_id in insiders :
-                    insiders.remove(user_2_id)
+                char_of_1[f'team_player_{user_1_player}']['dead']='True'
+                keyboard1=[]
+                for s in range(4):
+                    if char_of_1[f'team_player_{s+1}']['name']!='None':
+                        if char_of_1[f'team_player_{s+1}']['dead']=='False':
+                            if char_of_1[f'team_player_{s+1}']['name']!=char_of_1[f'team_player_{user_1_player}']['name']:
+                                keyboard1.append([InlineKeyboardButton(f"{char_of_1[f'team_player_{s+1}']['name']}",callback_data=f'pvpmuu_saprad_{s+1}_{user_1_id}')])    
+                if len(keyboard1) < 1 :
+                    query.message.edit_text(text+f"\n\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\nAND [PLAYER 1](tg://user?id={user_1_id}) is defeated by [PLAYER 2](tg://user?id={user_2_id})",parse_mode=ParseMode.MARKDOWN)
+                    if user_1_id in insiders :
+                        insiders.remove(user_1_id)
+                    if user_2_id in insiders :
+                        insiders.remove(user_2_id)
+                    return
+                message=query.message.edit_text(text+f"\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\n[PLAYER 1](tg://user?id={user_1_id}) Choose your next character",InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
+                message_id = message.message_id
+                cd[message_id] = {}
+                cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                cd[message_id]['passive']=user_passive
+                cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
                 return
             else:
                 moves=charamoves(char_of_1[f"team_player_{user_1_player}"])
@@ -5408,11 +5527,28 @@ def passer_pvp(update,context):
         else:
             char_of_2[f'team_player_{user_1_player}']['hp']-=char_1_dmg
             if char_of_2[f'team_player_{user_2_player}']['hp']<1:
-                query.message.edit_text(text+f"\n\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\nAND [PLAYER 2](tg://user?id={user_2_id}) is defeated by [PLAYER 1](tg://user?id={user_1_id})",parse_mode=ParseMode.MARKDOWN)
-                if user_1_id in insiders :
-                    insiders.remove(user_1_id)
-                if user_2_id in insiders :
-                    insiders.remove(user_2_id)
+                char_of_2[f'team_player_{user_2_player}']['dead']='True'
+                keyboard2=[]
+                for p in range(4):
+                    if char_of_2[f'team_player_{p+1}']['name']!='None':
+                        if char_of_2[f'team_player_{p+1}']['dead']=='False':
+                            if char_of_2[f'team_player_{p+1}']['name']!=char_of_2[f'team_player_{user_2_player}']['name']:
+                                keyboard1.append([InlineKeyboardButton(f"{char_of_2[f'team_player_{p+1}']['name']}",callback_data=f'pvpmuu_saprad_{p+1}_{user_2_id}')])    
+                if len(keyboard1) < 1 :
+                    query.message.edit_text(text+f"\n\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\nAND [PLAYER 2](tg://user?id={user_2_id}) is defeated by [PLAYER 1](tg://user?id={user_1_id})",parse_mode=ParseMode.MARKDOWN)
+                    if user_1_id in insiders :
+                        insiders.remove(user_1_id)
+                    if user_2_id in insiders :
+                        insiders.remove(user_2_id)
+                    return
+                message=query.message.edit_text(text+f"\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\n[PLAYER 2](tg://user?id={user_2_id}) Choose your next character",InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
+                message_id = message.message_id
+                cd[message_id] = {}
+                cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                cd[message_id]['passive']=user_passive
+                cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
                 return
             else:
                 text+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Tried to Dodge {char_of_1[f'team_player_{user_1_player}']['name']} but Failed\nAND got Hit by {char_of_1[f'team_player_{user_1_player}']['name']} Attack*"
@@ -5455,11 +5591,29 @@ def passer_pvp(update,context):
         text1+="*\nAND*"
         char_of_2[f'team_player_{user_2_player}']['hp']-=char_1_dmg
         if char_of_2[f'team_player_{user_2_player}']['hp'] < 1:
-            query.message.edit_text(text+text1+f"\n\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\nAND [PLAYER 2](tg://user?id={user_2_id}) is defeated by [PLAYER 1](tg://user?id={user_1_id})",parse_mode=ParseMode.MARKDOWN)
-            if user_1_id in insiders :
-                insiders.remove(user_1_id)
-            if user_2_id in insiders :
-                insiders.remove(user_2_id)
+            char_of_2[f'team_player_{user_2_player}']['dead']='True'
+            keyboard2=[]
+            for p in range(4):
+                if char_of_2[f'team_player_{p+1}']['name']!='None':
+                    if char_of_2[f'team_player_{p+1}']['dead']=='False':
+                        if char_of_2[f'team_player_{p+1}']['name']!=char_of_2[f'team_player_{user_2_player}']['name']:
+                            keyboard1.append([InlineKeyboardButton(f"{char_of_2[f'team_player_{p+1}']['name']}",callback_data=f'pvpmuu_saprad_{p+1}_{user_2_id}')])    
+            if len(keyboard1) < 1 :
+                query.message.edit_text(text1+f"\n\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\nAND [PLAYER 2](tg://user?id={user_2_id}) is defeated by [PLAYER 1](tg://user?id={user_1_id})",parse_mode=ParseMode.MARKDOWN)
+                if user_1_id in insiders :
+                    insiders.remove(user_1_id)
+                if user_2_id in insiders :
+                    insiders.remove(user_2_id)
+                return
+            text1+=f"*\n{char_of_1[f'team_player_{user_1_player}']['name']} Dealt {char_1_dmg} to {char_of_2[f'team_player_{user_2_player}']['name']}*"
+            message=query.message.edit_text(text1+f"\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\n[PLAYER 2](tg://user?id={user_2_id}) Choose your next character",InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
+            message_id = message.message_id
+            cd[message_id] = {}
+            cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+            cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+            cd[message_id]['passive']=user_passive
+            cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+            cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
             return
         else:
             text1+=f"*\n{char_of_1[f'team_player_{user_1_player}']['name']} Dealt {char_1_dmg} to {char_of_2[f'team_player_{user_2_player}']['name']}*"
@@ -5480,13 +5634,31 @@ def passer_pvp(update,context):
         text1=f"[PLAYER 1](tg://user?id={users['user_1_id']})* swapped {char_of_1[f'team_player_{new_player_1}']['name']} with {char_of_1[f'team_player_{user_1_player}']['name']}*"
         user_1_player=new_player_1
         text1+="*\nAND*"
-        char_of_1[f'team_player_{user_2_player}']['hp']-=char_2_dmg
+        char_of_1[f'team_player_{user_1_player}']['hp']-=char_2_dmg
         if char_of_1[f'team_player_{user_1_player}']['hp'] < 1:
-            query.message.edit_text(text+f"\n\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\nAND [PLAYER 1](tg://user?id={user_1_id}) is defeated by [PLAYER 2](tg://user?id={user_2_id})",parse_mode=ParseMode.MARKDOWN)
-            if user_1_id in insiders :
-                insiders.remove(user_1_id)
-            if user_2_id in insiders :
-                insiders.remove(user_2_id)
+            char_of_1[f'team_player_{user_1_player}']['dead']='True'
+            keyboard1=[]
+            for s in range(4):
+                if char_of_1[f'team_player_{s+1}']['name']!='None':
+                    if char_of_1[f'team_player_{s+1}']['dead']=='False':
+                        if char_of_1[f'team_player_{s+1}']['name']!=char_of_1[f'team_player_{user_1_player}']['name']:
+                            keyboard1.append([InlineKeyboardButton(f"{char_of_1[f'team_player_{s+1}']['name']}",callback_data=f'pvpmuu_saprad_{s+1}_{user_1_id}')])    
+            if len(keyboard1) < 1 :
+                query.message.edit_text(text1+f"\n\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\nAND [PLAYER 1](tg://user?id={user_1_id}) is defeated by [PLAYER 2](tg://user?id={user_2_id})",parse_mode=ParseMode.MARKDOWN)
+                if user_1_id in insiders :
+                    insiders.remove(user_1_id)
+                if user_2_id in insiders :
+                    insiders.remove(user_2_id)
+                return
+            text1+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Dealt {char_2_dmg} to {char_of_1[f'team_player_{user_1_player}']['name']}*"
+            message=query.message.edit_text(text1+f"\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\n[PLAYER 1](tg://user?id={user_1_id}) Choose your next character",InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
+            message_id = message.message_id
+            cd[message_id] = {}
+            cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+            cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+            cd[message_id]['passive']=user_passive
+            cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+            cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
             return
         else:
             text1+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Dealt {char_2_dmg} to {char_of_1[f'team_player_{user_1_player}']['name']}*"
@@ -5566,52 +5738,57 @@ def pvp_swap_mou(update,context):
     char_of_1=user_teams['user_1_team']
     char_of_2=user_teams['user_2_team']
     text=""
-    if user.id == user_1_id :
-        if user.id != int(query.data.split('_')[2]):
-            query.answer("PLAYER 1 TURN",show_alert=True)
+    if query.data.split("_")[1] == "swap":
+        if user.id == user_1_id :
+            if user.id != int(query.data.split('_')[2]):
+                query.answer("PLAYER 1 TURN",show_alert=True)
+                return
+            keyboard1=[]
+            for i in range (4):
+                if char_of_1[f'team_player_{i+1}']['name']!='None':
+                    if char_of_1[f'team_player_{i+1}']['dead']=='False':
+                        if char_of_1[f'team_player_{i+1}']['name']!=char_of_1[f'team_player_{user_1_player}']['name']:
+                            keyboard1.append([InlineKeyboardButton(f"{char_of_1[f'team_player_{i+1}']['name']}",callback_data=f'pvpmu_sapru_{i+1}_{user_1_id}')])
+            if len(keyboard1) < 1 :
+                query.answer("You only have 1 character left",show_alert=True)
+                return
+            keyboard1.append([InlineKeyboardButton(f"BACK",callback_data=f'pvpmu_sapru_back_{user_1_id}')])
+            message=query.message.edit_text("*Choose the character*",reply_markup=InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
+            message_id = message.message_id
+            cd[message_id] = {}
+            cd[message_id]['users']=users
+            cd[message_id]['teams']=user_teams
+            cd[message_id]['passive']=user_passive
+            cd[message_id]['move_done']=move
+            cd[message_id]['pvp_player_no']=player_no
             return
-        keyboard1=[]
-        for i in range (4):
-            if char_of_1[f'team_player_{i+1}']['name']!='None':
-                if char_of_1[f'team_player_{i+1}']['dead']=='False':
-                    if char_of_1[f'team_player_{i+1}']['name']!=char_of_1[f'team_player_{user_1_player}']['name']:
-                        keyboard1.append([InlineKeyboardButton(f"{char_of_1[f'team_player_{i+1}']['name']}",callback_data=f'pvpmu_sapru_{i+1}_{user_1_id}')])
-        if len(keyboard1) < 1 :
-            query.answer("You only have 1 character left",show_alert=True)
+        if user.id == user_2_id :
+            if user.id != int(query.data.split('_')[2]):
+                query.answer("PLAYER 2 TURN",show_alert=True)
+                return
+            keyboard2=[]
+            for i in range (4):
+                if char_of_2[f'team_player_{i+1}']['name']!='None':
+                    if char_of_2[f'team_player_{i+1}']['dead']=='False':
+                        if char_of_2[f'team_player_{i+1}']['name']!=char_of_2[f'team_player_{user_2_player}']['name']:
+                            keyboard2.append([InlineKeyboardButton(f"{char_of_2[f'team_player_{i+1}']['name']}",callback_data=f'pvpmu_sapru_{i+1}_{user_2_id}')])    
+            if len(keyboard2) < 1 :
+                query.answer("You only have 1 character left",show_alert=True)
+                return
+            keyboard2.append([InlineKeyboardButton(f"BACK",callback_data=f'pvpmu_sapru_back_{user_2_id}')])
+            message=query.message.edit_text("*Choose the character*",reply_markup=InlineKeyboardMarkup(keyboard2),parse_mode=ParseMode.MARKDOWN)
+            message_id = message.message_id
+            cd[message_id] = {}
+            cd[message_id]['users']=users
+            cd[message_id]['teams']=user_teams
+            cd[message_id]['passive']=user_passive
+            cd[message_id]['move_done']=move
+            cd[message_id]['pvp_player_no']=player_no
             return
-        keyboard1.append([InlineKeyboardButton(f"BACK",callback_data=f'pvpmu_sapru_back_{user_1_id}')])
-        message=query.message.edit_text("*Choose the character*",reply_markup=InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
-        message_id = message.message_id
-        cd[message_id] = {}
-        cd[message_id]['users']=users
-        cd[message_id]['teams']=user_teams
-        cd[message_id]['passive']=user_passive
-        cd[message_id]['move_done']=move
-        cd[message_id]['pvp_player_no']=player_no
-        return
-    if user.id == user_2_id :
-        if user.id != int(query.data.split('_')[2]):
-            query.answer("PLAYER 2 TURN",show_alert=True)
-            return
-        keyboard2=[]
-        for i in range (4):
-            if char_of_2[f'team_player_{i+1}']['name']!='None':
-                if char_of_2[f'team_player_{i+1}']['dead']=='False':
-                    if char_of_2[f'team_player_{i+1}']['name']!=char_of_2[f'team_player_{user_2_player}']['name']:
-                        keyboard2.append([InlineKeyboardButton(f"{char_of_2[f'team_player_{i+1}']['name']}",callback_data=f'pvpmu_sapru_{i+1}_{user_2_id}')])    
-        if len(keyboard2) < 1 :
-            query.answer("You only have 1 character left",show_alert=True)
-            return
-        keyboard2.append([InlineKeyboardButton(f"BACK",callback_data=f'pvpmu_sapru_back_{user_2_id}')])
-        message=query.message.edit_text("*Choose the character*",reply_markup=InlineKeyboardMarkup(keyboard2),parse_mode=ParseMode.MARKDOWN)
-        message_id = message.message_id
-        cd[message_id] = {}
-        cd[message_id]['users']=users
-        cd[message_id]['teams']=user_teams
-        cd[message_id]['passive']=user_passive
-        cd[message_id]['move_done']=move
-        cd[message_id]['pvp_player_no']=player_no
-        return
+    elif query.data.split("_")[1] == "saprad":
+        print("okay")
+
+
 
 def recover_user(update,context):
     user=update.effective_user
