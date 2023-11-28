@@ -5740,6 +5740,8 @@ def pvp_swap_mou(update,context):
     char_of_1=user_teams['user_1_team']
     char_of_2=user_teams['user_2_team']
     text=""
+    Player_1=context.bot.getChat(user_1_id)
+    Player_2=context.bot.getChat(user_2_id)
     if query.data.split("_")[1] == "swap":
         if user.id == user_1_id :
             if user.id != int(query.data.split('_')[2]):
