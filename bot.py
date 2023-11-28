@@ -26,7 +26,7 @@ playable_character=[char.SHADOW_char,char.morax_char,char.ry_char,
                    #4 star character down 5 to ....
                     char.fischl_char,char.echo_char,char.qiqi_char]
 CHANGE_WEAPON,GACHA_LUCK,BATTLE_FINISH,TEAM_CHANGER,PVP_FINISH,KINGDOM_HANDLER, *_ = range(100)
-
+quests=quests.all_quests
 
 def start(update,context):
     if maintenance_mode == "ON":
@@ -5836,6 +5836,7 @@ def quest(update,context):
     refferal=user_data[1].find_one({'_id': ObjectId(user_obj_id)})['extras']['refferal']
     keyboard=[[InlineKeyboardButton('BACK',callback_data=f'back_to_event')]]
     query.answer("Updating ",show_alert=True)
+    print(quests)
     return
   
 def check_dta(update,context):
