@@ -1,3 +1,4 @@
+import random
 
 quest_1={"type":"kill","monster":"Fighter Goblin","level":random.randint(1,10),"reward":15,"reward_type":"stargems"}
 quest_2={"type":"kill","monster":"Skeleton Knight","level":random.randint(1,10),"reward":15,"reward_type":"stargems"}
