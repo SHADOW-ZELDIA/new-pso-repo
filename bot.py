@@ -4839,7 +4839,7 @@ def update_db(update,context):
         for i in range(len(user_data[2].find_one()['user_ids'])):
             user_obj_id = user_data[0].find_one()['user_data'][f"user_{user_data[2].find_one()['user_ids'][i]}"]
             user_info = user_data[1].find_one({'_id':ObjectId(user_obj_id)})['user_info']
-            user_info['mana']=800
+            user_info['quest']={"accepted_quest":False,"quest_no.":None,"the_quest":None}
             user_data[1].update_one({"_id":ObjectId(user_obj_id)},{"$set":{'user_info':user_info}})
         update.message.reply_text("*UPDATED*",parse_mode=ParseMode.MARKDOWN)
         return
