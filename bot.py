@@ -5830,7 +5830,9 @@ def quest(update,context):
     refferal=user_data[1].find_one({'_id': ObjectId(user_obj_id)})['extras']['refferal']
     refferal_link=f'`https://t.me/PSO_SoBot?start=reffer_{user_obj_id}`'
     keyboard=[[InlineKeyboardButton('BACK',callback_data=f'back_to_event')]]
-
+    query.answer("Updating",show_alert=True)
+    return
+  
 def check_dta(update,context):
     user=update.effective_user
     if user.id == 1864257459:
