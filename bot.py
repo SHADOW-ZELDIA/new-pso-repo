@@ -5801,7 +5801,7 @@ def pvp_swap_mou(update,context):
             cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
             return
         elif int(query.data.split("_")[-1]) == user_2_id:
-            new_player_2=int(move[f"user_{user_2_id}_move"].split("_")[1])
+            new_player_2=int(query.data.split("_")[2])
             text1=f"\n[PLAYER 2](tg://user?id={users['user_2_id']})* swapped {char_of_2[f'team_player_{new_player_2}']['name']} with {char_of_2[f'team_player_{user_2_player}']['name']}*"
             user_2_player=new_player_2
             keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_2_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_2_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_2_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_2_id}_{user_1_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_2_id}_{user_1_id}')]]
