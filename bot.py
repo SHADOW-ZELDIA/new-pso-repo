@@ -5815,7 +5815,7 @@ def pvp_swap_mou(update,context):
             cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
             return
 
-def refferal(update,context):
+def quest(update,context):
     if maintenance_mode == "ON":
         if update.effective_user.id not in admins_id:
             try:
@@ -5830,6 +5830,7 @@ def refferal(update,context):
     refferal=user_data[1].find_one({'_id': ObjectId(user_obj_id)})['extras']['refferal']
     refferal_link=f'`https://t.me/PSO_SoBot?start=reffer_{user_obj_id}`'
     keyboard=[[InlineKeyboardButton('BACK',callback_data=f'back_to_event')]]
+
 def check_dta(update,context):
     user=update.effective_user
     if user.id == 1864257459:
@@ -5896,7 +5897,7 @@ def main():
         allow_reentry=True,
         per_user=True,
         run_async = True)
-    CHANGE_TEAM_COMB = ConversationHandler(entry_points=[CallbackQueryHandler(tem_selecter, pattern= f'teamselect',run_async=True),CallbackQueryHandler(c_level_up, pattern= f'level_up',run_async=True),CallbackQueryHandler(main_level_up, pattern= f'level_mychar',run_async=True),CallbackQueryHandler(refferal, pattern= f'reffer_maker',run_async=True)],
+    CHANGE_TEAM_COMB = ConversationHandler(entry_points=[CallbackQueryHandler(tem_selecter, pattern= f'teamselect',run_async=True),CallbackQueryHandler(c_level_up, pattern= f'level_up',run_async=True),CallbackQueryHandler(main_level_up, pattern= f'level_mychar',run_async=True),CallbackQueryHandler(refferal, pattern= f'reffer_maker',run_async=True),CallbackQueryHandler(quest, pattern= f'quests_event',run_async=True)],
         states={TEAM_CHANGER:[CallbackQueryHandler(team_changer,pattern=f"team_change",run_async=True)]},
         fallbacks=[],
         allow_reentry=True,
