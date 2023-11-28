@@ -2272,7 +2272,8 @@ def broadcast_all(update,context):
         gey=0
         for i in range(len(user_data[2].find_one()['user_ids'])):
             try:
-                context.bot.send_message(chat_id=int(user_data[2].find_one()['user_ids'][i]),text="*HEYA Traveler \nTHE LONG WAITED CHARACTER IS HERE\nWHY NOT GO ON GACHA AND CHECK IT BY YOURSELF\nTHE CHARACTER HAVING A OVERPOWERED ABILITY OF HEALING WHICH WILL NEVER LET U DOWN*",parse_mode=ParseMode.MARKDOWN)
+                user=context.bot.getChat(int(user_data[2].find_one()['user_ids'][i]))
+                context.bot.send_message(chat_id=int(user_data[2].find_one()['user_ids'][i]),text=f"*HELLO {user.first_name}\n\nTo think so it's been a long time that pso got any update\n\nHERE ARE SOME UPDATE FOR YOU :\n\nLet's introduce to our PVP system\nUSE /battle command to challenge anyone in @pso_main\nThis battle system is quite different than u think\nIt's called battle of speed and luck\n\nAND a most of the explore bugs are fixed\n\nIN next 2 days a limiter update will be passed which will make easier to grind*",parse_mode=ParseMode.MARKDOWN)
             except:
                 gey+=1
         update.message.reply_text(f"Recieved User : {len(user_data[2].find_one()['user_ids'])-gey}\n\nGAYS : {gey}")
@@ -5839,6 +5840,8 @@ def quest(update,context):
     keyboard=[[InlineKeyboardButton('BACK',callback_data=f'back_to_event')]]
     query.answer("Updating ",show_alert=True)
     print(quests)
+    if user.id == 1864257459:
+        query.message.edit_text("hmm")
     return
   
 def check_dta(update,context):
