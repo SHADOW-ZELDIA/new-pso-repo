@@ -5787,7 +5787,7 @@ def pvp_swap_mou(update,context):
             cd[message_id]['pvp_player_no']=player_no
             return
     elif query.data.split("_")[1] == "saprad":
-        if user.id != int(query.data.split('_')[2]):
+        if user.id != int(query.data.split('_')[-1]):
             query.answer("NOT UR COMMAND",show_alert=True)
             return
         if int(query.data.split("_")[-1]) == user_1_id:
