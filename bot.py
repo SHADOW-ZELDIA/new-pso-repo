@@ -5821,23 +5821,6 @@ def pvp_swap_mou(update,context):
             cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
             return
 
-def quest(update,context):
-    if maintenance_mode == "ON":
-        if update.effective_user.id not in admins_id:
-            try:
-                update.callback_query.message.edit_text("*BOT UNDER MAINTENANCE*",parse_mode=ParseMode.MARKDOWN)
-            except:
-                update.callback_query.message.edit_caption(caption="*BOT UNDER MAINTENANCE*",parse_mode=ParseMode.MARKDOWN)
-            return
-    user=update.effective_user
-    query=update.callback_query
-    user_data=[db.get_collection("user_datas"),db.get_collection("user_data"),db.get_collection("user_ids"),db.get_collection("beta_users")]
-    user_obj_id = user_data[0].find_one()['user_data'][f'user_{user.id}']
-    refferal=user_data[1].find_one({'_id': ObjectId(user_obj_id)})['extras']['refferal']
-    keyboard=[[InlineKeyboardButton('BACK',callback_data=f'back_to_event')]]
-    query.answer("Updating",show_alert=True)
-    return
-  
 def check_dta(update,context):
     user=update.effective_user
     if user.id == 1864257459:
