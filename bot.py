@@ -5835,7 +5835,7 @@ def quest(update,context):
     user_obj_id = user_data[0].find_one()['user_data'][f'user_{user.id}']
     refferal=user_data[1].find_one({'_id': ObjectId(user_obj_id)})['extras']['refferal']
     keyboard=[[InlineKeyboardButton('BACK',callback_data=f'back_to_event')]]
-    query.answer("Updating",show_alert=True)
+    query.answer("Updating ",show_alert=True)
     return
   
 def check_dta(update,context):
