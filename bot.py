@@ -4863,7 +4863,7 @@ def battle_maker(update,context):
     if replied_user.id in [6343863154,6149996968]:
         update.message.reply_text("*HUH TRYING TO CHALLENGE ME ?\n\nI'M FAR STRONGER THAN U KIDDO\nGET LOST*",parse_mode=ParseMode.MARKDOWN) 
         return
-    if replied_user in insiders or replied_user in battlers :
+    if replied_user.id in insiders or replied_user.id in battlers :
         update.message.reply_text("*REPLIED USER IS CURRENTLY IN A BATTLE*",parse_mode=ParseMode.MARKDOWN) 
         return
     if user.id in insiders or user.id in battlers :
@@ -5410,6 +5410,7 @@ def passer_pvp(update,context):
         if dodged_not[0] == True:
             recoil_dmg=round(1.5*char_2_dmg)
             char_of_2[f'team_player_{user_2_player}']['hp']-=recoil_dmg
+            text+=f"*\n{char_of_1[f'team_player_{user_1_player}']['name']} dodged {char_of_2[f'team_player_{user_2_player}']['name']} Attack And\nThe {char_of_2[f'team_player_{user_2_player}']['name']} got hit by {recoil_dmg} DMG*"
             if char_of_2[f'team_player_{user_2_player}']['hp']<1:
                 char_of_2[f'team_player_{user_2_player}']['dead']='True'
                 keyboard2=[]
