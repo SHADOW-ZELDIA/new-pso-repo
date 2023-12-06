@@ -25,14 +25,17 @@ async def user_id_getter(event):
         if all_ids[i] in user_id:
             already_in+=1
             print(f"already in {i}")
+            for_check=0
         else:
             try:
                 await T.send_message(all_ids[i], "umm can you try this bot\n@pso_sobot\nit's not like i saying you have to but you can try it once\nit's a game bot")
                 user_id.append(all_ids[i])
-                time.sleep(60)
             except:
+                for_check+=1
                 gays+=1
                 print(f"failed {i}")
+            if for_check!=1:
+                time.sleep(60)
     await T.send_message(chat,f"Kidnapping done\n\nTotal Kidnapped User : {len(all_ids)-gays-already_in}\n\nTotal Gays : {gays}\n\nALREADY KIDNAPPED USER : {already_in}")
     user_ids.update_one({"_id":ObjectId(obj_id)},{"$set":{'user_ids':user_id}})
 
