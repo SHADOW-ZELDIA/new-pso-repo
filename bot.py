@@ -2,7 +2,11 @@ API_KEY = '6149996968:AAHjfT6t-6wxjUPgTGiPZqgkk9ZcOG3iOnA'
 uri = "mongodb+srv://shadow_userbot:1976abcd?@shadowbot.jcgbzsl.mongodb.net/?retryWrites=true&w=majority"
 from telegram import *
 from telegram.ext import *
-import random , logging , html , char , datetime , pymongo , asyncio , time , monster , os , PIL , pytz , quests , telethon_another
+<<<<<<< HEAD
+import random , logging , html , char , datetime , pymongo , asyncio , time , monster , os , PIL , pytz , quests
+=======
+import random , logging , html , char , datetime , pymongo , asyncio , time , monster , os , PIL , pytz , quests 
+>>>>>>> 9e58ccc16be7f6e62bfc2123c97eebad1e53ff35
 from pymongo.mongo_client import MongoClient
 from bson.objectid import ObjectId
 from pymongo.server_api import ServerApi
