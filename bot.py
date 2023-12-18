@@ -5034,6 +5034,16 @@ def pvp_muu(update,context):
     user_2_id = users['user_2_id']
     Player_1=context.bot.getChat(user_1_id).first_name
     Player_2=context.bot.getChat(user_2_id).first_name
+    user_1_id_team = user_teams['user_1_team']
+    user_2_id_team = user_teams['user_2_team']
+    if user_2_id_team[f'team_player_{user_2_player}']['rank'] == 4 :
+      media_pvp_2="photo"
+    else:
+      media_pvp_2="video"
+    if user_1_id_team[f'team_player_{user_1_player}']['rank'] == 4 :
+      media_pvp_1="photo"
+    else:
+      media_pvp_1="video"
     if query.data.split("_")[1] == "normal":
         if user.id != int(query.data.split('_')[2]):
             query.answer("NOT YOUR COMMAND NIGGA",show_alert=True)
@@ -5050,7 +5060,7 @@ def pvp_muu(update,context):
                     text1=""
                     text1+=f"*AS *[{Player_2}](tg://user?id={users['user_2_id']})* have already choosen the Attack\nNOW *[{Player_1}](tg://user?id={users['user_1_id']})* choose the attack you would like to do*"
                     text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{user_1_id_team[f'team_player_{user_1_player}']['name']} [ {user_1_id_team[f'team_player_{user_1_player}']['element']} ]*\n`{user_1_id_team[f'team_player_{user_1_player}']['name']} HP : `*{user_1_id_team[f'team_player_{user_1_player}']['hp']}*\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{user_2_id_team[f'team_player_{user_2_player}']['name']} [ {user_2_id_team[f'team_player_{user_2_player}']['element']} ]*\n`{user_2_id_team[f'team_player_{user_2_player}']['name']} HP : `*{user_2_id_team[f'team_player_{user_2_player}']['hp']}*"
-                    text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move*"
+                    text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({user_1_id_team[f'team_player_{user_1_player}'][media_pvp]})"
                     message=query.message.edit_text(text1,reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                     message_id = message.message_id
                     cd[message_id] = {}
@@ -5067,7 +5077,7 @@ def pvp_muu(update,context):
                     text2=""
                     text2+=f"*AS *[{Player_1}](tg://user?id={users['user_1_id']})* have already choosen the Attack\nNOW *[{Player_2}](tg://user?id={users['user_2_id']})* choose the attack you would like to do*"
                     text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{user_2_id_team[f'team_player_{user_2_player}']['name']} [ {user_2_id_team[f'team_player_{user_2_player}']['element']} ]*\n`{user_2_id_team[f'team_player_{user_2_player}']['name']} HP : `*{user_2_id_team[f'team_player_{user_2_player}']['hp']}*\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{user_1_id_team[f'team_player_{user_1_player}']['name']} [ {user_1_id_team[f'team_player_{user_1_player}']['element']} ]*\n`{user_1_id_team[f'team_player_{user_1_player}']['name']} HP : `*{user_1_id_team[f'team_player_{user_1_player}']['hp']}*"
-                    text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move*"
+                    text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move* [:]({user_2_id_team[f'team_player_{user_2_player}'][media_pvp]})"
                     message=query.message.edit_text(text2,reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                     message_id = message.message_id
                     cd[message_id] = {}
@@ -5097,7 +5107,7 @@ def pvp_muu(update,context):
                     text1=""
                     text1+=f"*AS *[{Player_2}](tg://user?id={users['user_2_id']})* have already choosen the Attack\nNOW *[{Player_1}](tg://user?id={users['user_1_id']})* choose the attack you would like to do*"
                     text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{user_1_id_team[f'team_player_{user_1_player}']['name']} [ {user_1_id_team[f'team_player_{user_1_player}']['element']} ]*\n`{user_1_id_team[f'team_player_{user_1_player}']['name']} HP : `*{user_1_id_team[f'team_player_{user_1_player}']['hp']}*\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{user_2_id_team[f'team_player_{user_2_player}']['name']} [ {user_2_id_team[f'team_player_{user_2_player}']['element']} ]*\n`{user_2_id_team[f'team_player_{user_2_player}']['name']} HP : `*{user_2_id_team[f'team_player_{user_2_player}']['hp']}*"
-                    text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move*"
+                    text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({user_1_id_team[f'team_player_{user_1_player}'][media_pvp]})"
                     message=query.message.edit_text(text1,reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                     message_id = message.message_id
                     cd[message_id] = {}
@@ -5114,7 +5124,7 @@ def pvp_muu(update,context):
                     text2=""
                     text2+=f"*AS *[{Player_1}](tg://user?id={users['user_1_id']})* have already choosen the Attack\nNOW *[{Player_2}](tg://user?id={users['user_2_id']})* choose the attack you would like to do*"
                     text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{user_2_id_team[f'team_player_{user_2_player}']['name']} [ {user_2_id_team[f'team_player_{user_2_player}']['element']} ]*\n`{user_2_id_team[f'team_player_{user_2_player}']['name']} HP : `*{user_2_id_team[f'team_player_{user_2_player}']['hp']}*\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{user_1_id_team[f'team_player_{user_1_player}']['name']} [ {user_1_id_team[f'team_player_{user_1_player}']['element']} ]*\n`{user_1_id_team[f'team_player_{user_1_player}']['name']} HP : `*{user_1_id_team[f'team_player_{user_1_player}']['hp']}*"
-                    text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move*"
+                    text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move* [:]({user_2_id_team[f'team_player_{user_2_player}'][media_pvp]})"
                     message=query.message.edit_text(text2,reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                     message_id = message.message_id
                     cd[message_id] = {}
@@ -5139,7 +5149,7 @@ def pvp_muu(update,context):
                 keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_1_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_1_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_1_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_1_id}_{user_2_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_1_id}_{user_2_id}')]]
                 text1+=f"*AS *[{Player_2}](tg://user?id={users['user_2_id']})* have already choosen the Attack\nNOW *[{Player_1}](tg://user?id={users['user_1_id']})* choose the attack you would like to do*"
                 text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{user_1_id_team[f'team_player_{user_1_player}']['name']} [ {user_1_id_team[f'team_player_{user_1_player}']['element']} ]*\n`{user_1_id_team[f'team_player_{user_1_player}']['name']} HP : `*{user_1_id_team[f'team_player_{user_1_player}']['hp']}*\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{user_2_id_team[f'team_player_{user_2_player}']['name']} [ {user_2_id_team[f'team_player_{user_2_player}']['element']} ]*\n`{user_2_id_team[f'team_player_{user_2_player}']['name']} HP : `*{user_2_id_team[f'team_player_{user_2_player}']['hp']}*"
-                text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move*"
+                text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({user_1_id_team[f'team_player_{user_1_player}'][media_pvp]})"
                 message=query.message.edit_text(text1,reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                 message_id = message.message_id
                 cd[message_id] = {}
@@ -5153,7 +5163,7 @@ def pvp_muu(update,context):
                 keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_2_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_2_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_2_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_1_id}_{user_2_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_1_id}_{user_2_id}')]]
                 text2+=f"*AS *[{Player_1}](tg://user?id={users['user_1_id']})* have already choosen the Attack\nNOW *[{Player_2}](tg://user?id={users['user_2_id']})* choose the attack you would like to do*"
                 text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{user_2_id_team[f'team_player_{user_2_player}']['name']} [ {user_2_id_team[f'team_player_{user_2_player}']['element']} ]*\n`{user_2_id_team[f'team_player_{user_2_player}']['name']} HP : `*{user_2_id_team[f'team_player_{user_2_player}']['hp']}*\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{user_1_id_team[f'team_player_{user_1_player}']['name']} [ {user_1_id_team[f'team_player_{user_1_player}']['element']} ]*\n`{user_1_id_team[f'team_player_{user_1_player}']['name']} HP : `*{user_1_id_team[f'team_player_{user_1_player}']['hp']}*"
-                text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move*"
+                text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move* [:]({user_2_id_team[f'team_player_{user_2_player}'][media_pvp]})"
                 message=query.message.edit_text(text2,reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                 message_id = message.message_id
                 cd[message_id] = {}
@@ -5174,7 +5184,7 @@ def pvp_muu(update,context):
                     text1=""
                     text1+=f"*AS *[{Player_2}](tg://user?id={users['user_2_id']})* have already choosen the Attack\nNOW *[{Player_1}](tg://user?id={users['user_1_id']})* choose the attack you would like to do*"
                     text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{user_1_id_team[f'team_player_{user_1_player}']['name']} [ {user_1_id_team[f'team_player_{user_1_player}']['element']} ]*\n`{user_1_id_team[f'team_player_{user_1_player}']['name']} HP : `*{user_1_id_team[f'team_player_{user_1_player}']['hp']}*\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{user_2_id_team[f'team_player_{user_2_player}']['name']} [ {user_2_id_team[f'team_player_{user_2_player}']['element']} ]*\n`{user_2_id_team[f'team_player_{user_2_player}']['name']} HP : `*{user_2_id_team[f'team_player_{user_2_player}']['hp']}*"
-                    text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move*"
+                    text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({user_1_id_team[f'team_player_{user_1_player}'][media_pvp]})"
                     message=query.message.edit_text(text1,reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                     message_id = message.message_id
                     cd[message_id] = {}
@@ -5191,7 +5201,7 @@ def pvp_muu(update,context):
                     text2=""
                     text2+=f"*AS *[{Player_1}](tg://user?id={users['user_1_id']})* have already choosen the Attack\nNOW *[{Player_2}](tg://user?id={users['user_2_id']})* choose the attack you would like to do*"
                     text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{user_2_id_team[f'team_player_{user_2_player}']['name']} [ {user_2_id_team[f'team_player_{user_2_player}']['element']} ]*\n`{user_2_id_team[f'team_player_{user_2_player}']['name']} HP : `*{user_2_id_team[f'team_player_{user_2_player}']['hp']}*\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{user_1_id_team[f'team_player_{user_1_player}']['name']} [ {user_1_id_team[f'team_player_{user_1_player}']['element']} ]*\n`{user_1_id_team[f'team_player_{user_1_player}']['name']} HP : `*{user_1_id_team[f'team_player_{user_1_player}']['hp']}*"
-                    text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move*"
+                    text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move* [:]({user_2_id_team[f'team_player_{user_2_player}'][media_pvp]})"
                     message=query.message.edit_text(text2,reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                     message_id = message.message_id
                     cd[message_id] = {}
