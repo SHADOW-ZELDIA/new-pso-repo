@@ -5254,6 +5254,16 @@ def passer_pvp(update,context):
     Player_2=context.bot.getChat(user_2_id).first_name
     char_of_1=user_teams['user_1_team']
     char_of_2=user_teams['user_2_team']
+    user_1_id_team = user_teams['user_1_team']
+    user_2_id_team = user_teams['user_2_team']
+    if user_2_id_team[f'team_player_{user_2_player}']['rank'] == 4 :
+      media_pvp_2="photo"
+    else:
+      media_pvp_2="video"
+    if user_1_id_team[f'team_player_{user_1_player}']['rank'] == 4 :
+      media_pvp_1="photo"
+    else:
+      media_pvp_1="video"
     def_of_1=char_of_1[f'team_player_{user_1_player}']['def']
     def_of_2=char_of_2[f'team_player_{user_2_player}']['def']
     char_crit=[True,False]
@@ -5292,7 +5302,7 @@ def passer_pvp(update,context):
                 if user_2_id in insiders :
                   insiders.remove(user_2_id)
                   return
-              message=query.message.edit_text(text+f"\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\n[{Player_2}](tg://user?id={user_2_id}) Choose your next character",reply_markup=InlineKeyboardMarkup(keyboard2),parse_mode=ParseMode.MARKDOWN)
+              message=query.message.edit_text(text+f"\n{char_of_2[f'team_player_{user_2_player}']['name']}* is now dead*\n\n[{Player_2}](tg://user?id={user_2_id})* Choose your next character *[:](https://graph.org/file/63200ce7823c4f3a4062f.mp4)",reply_markup=InlineKeyboardMarkup(keyboard2),parse_mode=ParseMode.MARKDOWN)
               message_id = message.message_id
               cd[message_id] = {}
               cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
@@ -5318,7 +5328,7 @@ def passer_pvp(update,context):
                         if user_2_id in insiders :
                             insiders.remove(user_2_id)
                         return
-                    message=query.message.edit_text(text+f"\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\n[{Player_1}](tg://user?id={user_1_id}) Choose your next character",reply_markup=InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
+                    message=query.message.edit_text(text+f"\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\n[{Player_1}](tg://user?id={user_1_id})* Choose your next character* [:](https://graph.org/file/63200ce7823c4f3a4062f.mp4)",reply_markup=InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
                     message_id = message.message_id
                     cd[message_id] = {}
                     cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
@@ -5332,7 +5342,7 @@ def passer_pvp(update,context):
                     moves=charamoves(char_of_1[f"team_player_{user_1_player}"])
                     text1=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{char_of_1[f'team_player_{user_1_player}']['name']} [ {char_of_1[f'team_player_{user_1_player}']['element']} ]*\n`{char_of_1[f'team_player_{user_1_player}']['name']} HP : `*{char_of_1[f'team_player_{user_1_player}']['hp']}*\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{char_of_2[f'team_player_{user_2_player}']['name']} [ {char_of_2[f'team_player_{user_2_player}']['element']} ]*\n`{char_of_2[f'team_player_{user_2_player}']['name']} HP : `*{char_of_2[f'team_player_{user_2_player}']['hp']}*"
                     keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_1_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_1_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_1_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_1_id}_{user_2_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_1_id}_{user_2_id}')]]
-                    message=query.message.edit_text(text+text1+f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move*",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
+                    message=query.message.edit_text(text+text1+f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({user_1_id_team[f'team_player_{user_1_player}'][media_pvp_1]})",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                     message_id = message.message_id
                     cd[message_id] = {}
                     cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
@@ -5359,7 +5369,7 @@ def passer_pvp(update,context):
                     if user_2_id in insiders :
                         insiders.remove(user_2_id)
                     return
-                message=query.message.edit_text(text+f"\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\n[{Player_1}](tg://user?id={user_1_id}) Choose your next character",reply_markup=InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
+                message=query.message.edit_text(text+f"\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\n[{Player_1}](tg://user?id={user_1_id})* Choose your next character* [:](https://graph.org/file/63200ce7823c4f3a4062f.mp4)",reply_markup=InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
                 message_id = message.message_id
                 cd[message_id] = {}
                 cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
@@ -5385,7 +5395,7 @@ def passer_pvp(update,context):
                         if user_2_id in insiders :
                             insiders.remove(user_2_id)
                         return
-                    message=query.message.edit_text(text+f"\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\n[{Player_2}](tg://user?id={user_2_id}) Choose your next character",reply_markup=InlineKeyboardMarkup(keyboard2),parse_mode=ParseMode.MARKDOWN)
+                    message=query.message.edit_text(text+f"\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\n[{Player_2}](tg://user?id={user_2_id})* Choose your next character* [:](https://graph.org/file/63200ce7823c4f3a4062f.mp4)",reply_markup=InlineKeyboardMarkup(keyboard2),parse_mode=ParseMode.MARKDOWN)
                     message_id = message.message_id
                     cd[message_id] = {}
                     cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
@@ -5398,7 +5408,7 @@ def passer_pvp(update,context):
                 moves=charamoves(char_of_2[f"team_player_{user_2_player}"])
                 text2=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{char_of_2[f'team_player_{user_2_player}']['name']} [ {char_of_2[f'team_player_{user_2_player}']['element']} ]*\n`{char_of_2[f'team_player_{user_2_player}']['name']} HP : `*{char_of_2[f'team_player_{user_2_player}']['hp']}*\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{char_of_1[f'team_player_{user_1_player}']['name']} [ {char_of_1[f'team_player_{user_1_player}']['element']} ]*\n`{char_of_1[f'team_player_{user_1_player}']['name']} HP : `*{char_of_1[f'team_player_{user_1_player}']['hp']}*"
                 keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_2_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_2_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_2_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_2_id}_{user_1_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_2_id}_{user_1_id}')]]
-                message=query.message.edit_text(text+text2+f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move*",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
+                message=query.message.edit_text(text+text2+f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move* [:]({user_2_id_team[f'team_player_{user_2_player}'][media_pvp_2]})",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                 message_id = message.message_id
                 cd[message_id] = {}
                 cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
