@@ -4056,106 +4056,127 @@ def charamoves(x):
         moves['skill_move']={'name':'Light Enchance','usage':2}
         moves['ult_move']={'name':'LIGHT FALL','cost':250}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='SHADOW ( BETA CHAR )':
         moves['normal_move']={'name':'Sword Hit'}
         moves['skill_move']={'name':'Slime Sword','usage':1}
         moves['ult_move']={'name':' ATOMIC ! ','cost':300}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='MORAX ( BETA CHAR )':
         moves['normal_move']={'name':'Spear Slide'}
         moves['skill_move']={'name':'Stone summon','usage':2}
         moves['ult_move']={'name':'Spear Throw','cost':200,'video':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='KRATOS':
         moves['normal_move']={'name':'Gauntlet punch'}
         moves['skill_move']={'name':'Gauntlet Rush','usage':1}
         moves['ult_move']={'name':'Leviathan Arm','cost':300,'video':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='CLAUDIA':
         moves['normal_move']={'name':'Sword Cut'}
         moves['skill_move']={'name':'Deviation','usage':3}
         moves['ult_move']={'name':'Dimensional Cut','cost':200,'video':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='FISCHL':
         moves['normal_move']={'name':'Arrow Throw'}
         moves['skill_move']={'name':'Summon Oz','usage':2}
         moves['ult_move']={'name':'The one with Oz','cost':150,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='ECHO':
         moves['normal_move']={'name':'Spear slide'}
         moves['skill_move']={'name':'Electro Rush','usage': 2}
         moves['ult_move']={'name':'Electric Ray','cost':250,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='QIQI':
         moves['normal_move']={'name':'Sword Sting'}
         moves['skill_move']={'name':'Ice Heal','usage': 1}
         moves['ult_move']={'name':'Ice Field','cost':200,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='JEAN':
         moves['normal_move']={'name':'Sword Sting'}
         moves['skill_move']={'name':'Air Blow','usage': 2}
         moves['ult_move']={'name':'Dandelion Field','cost':200,'video':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='TIAN LANG':
         moves['normal_move']={'name':'Magic !'}
         moves['skill_move']={'name':'Electric field','usage': 2}
         moves['ult_move']={'name':'ELectro Staffing','cost':300,'video':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='DIAN FARRELL':
         moves['normal_move']={'name':'Scratch'}
         moves['skill_move']={'name':'Rage !','usage': 2}
         moves['ult_move']={'name':'Rage Attacks','cost':250,'video':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='KAYLA':
         moves['normal_move']={'name':'MAGIC'}
         moves['skill_move']={'name':'FLAME ENHANCE','usage': 1}
         moves['ult_move']={'name':'FLAME BURST','cost':250,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='KLAUDIA VALENTZ':
         moves['normal_move']={'name':'HIT'}
         moves['skill_move']={'name':'ICE HEAL !','usage':2}
         moves['ult_move']={'name':'FLOWER GARDEN','cost':250,'video':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='LISA':
         moves['normal_move']={'name':'electric'}
         moves['skill_move']={'name':'ELECTRO AREA','usage': 2}
         moves['ult_move']={'name':'ELECTRO BURST','cost':300,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='DOOMFIST':
         moves['normal_move']={'name':'Fist Attack'}
         moves['skill_move']={'name':'DOOM SHOT !','usage': 1}
         moves['ult_move']={'name':'DOOM !!!','cost':250,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='FIONA':
         moves['normal_move']={'name':'Slice'}
         moves['skill_move']={'name':'Sword Enhance !','usage': 2}
         moves['ult_move']={'name':'Water field','cost':300,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='RAIDEN SHOGUN':
         moves['normal_move']={'name':'STICK !'}
         moves['skill_move']={'name':'Lightning !','usage': 2}
         moves['ult_move']={'name':'ISLAND BREAKER : LIGHTNING','cost':300,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='SEKIRO':
         moves['normal_move']={'name':'Slash'}
         moves['skill_move']={'name':'ELEMENTAL ENHANCE !','usage': 2}
         moves['ult_move']={'name':'BLOOD MASSACRE','cost':250,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='BENNETT':
         moves['normal_move']={'name':'peck'}
         moves['skill_move']={'name':'Flame sword','usage': 3}
         moves['ult_move']={'name':'FLAME GROUND','cost':300,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='YUKONG':
         moves['normal_move']={'name':'Stance !'}
         moves['skill_move']={'name':'ATTACK Enhance !','usage': 2}
         moves['ult_move']={'name':'Water field','cost':250,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     if character['name']=='CANDACE':
         moves['normal_move']={'name':'Knock'}
         moves['skill_move']={'name':'Shield !','usage': 1}
         moves['ult_move']={'name':'Shield burst','cost':250,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
+        moves['media']=""
     return moves
 
 def bot_status(update,context):
