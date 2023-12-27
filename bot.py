@@ -4056,25 +4056,25 @@ def charamoves(x):
         moves['skill_move']={'name':'Light Enchance','usage':2}
         moves['ult_move']={'name':'LIGHT FALL','cost':250}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/035e6d09dd18e2acd172e.mp4"
     if character['name']=='SHADOW ( BETA CHAR )':
         moves['normal_move']={'name':'Sword Hit'}
         moves['skill_move']={'name':'Slime Sword','usage':1}
         moves['ult_move']={'name':' ATOMIC ! ','cost':300}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/605682b99d95306a6bad8.mp4"
     if character['name']=='MORAX ( BETA CHAR )':
         moves['normal_move']={'name':'Spear Slide'}
         moves['skill_move']={'name':'Stone summon','usage':2}
         moves['ult_move']={'name':'Spear Throw','cost':200,'video':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/2a93ed10f339f0786d95f.mp4"
     if character['name']=='KRATOS':
         moves['normal_move']={'name':'Gauntlet punch'}
         moves['skill_move']={'name':'Gauntlet Rush','usage':1}
         moves['ult_move']={'name':'Leviathan Arm','cost':300,'video':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/efff726931d7ff611ed19.mp4"
     if character['name']=='CLAUDIA':
         moves['normal_move']={'name':'Sword Cut'}
         moves['skill_move']={'name':'Deviation','usage':3}
@@ -4086,25 +4086,25 @@ def charamoves(x):
         moves['skill_move']={'name':'Summon Oz','usage':2}
         moves['ult_move']={'name':'The one with Oz','cost':150,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/20b80bfa7ec3aaf6defe1.jpg"
     if character['name']=='ECHO':
         moves['normal_move']={'name':'Spear slide'}
         moves['skill_move']={'name':'Electro Rush','usage': 2}
         moves['ult_move']={'name':'Electric Ray','cost':250,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/2a82df458e9b3c8c19868.jpg"
     if character['name']=='QIQI':
         moves['normal_move']={'name':'Sword Sting'}
         moves['skill_move']={'name':'Ice Heal','usage': 1}
         moves['ult_move']={'name':'Ice Field','cost':200,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/dedb1d8b0e6df3fa99108.jpg"
     if character['name']=='JEAN':
         moves['normal_move']={'name':'Sword Sting'}
         moves['skill_move']={'name':'Air Blow','usage': 2}
         moves['ult_move']={'name':'Dandelion Field','cost':200,'video':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/cdf13793f2d8dd33cc8ed.mp4"
     if character['name']=='TIAN LANG':
         moves['normal_move']={'name':'Magic !'}
         moves['skill_move']={'name':'Electric field','usage': 2}
