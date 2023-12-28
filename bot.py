@@ -4080,7 +4080,7 @@ def charamoves(x):
         moves['skill_move']={'name':'Deviation','usage':3}
         moves['ult_move']={'name':'Dimensional Cut','cost':200,'video':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/54eeab554c0f0f0843fe4.mp4"
     if character['name']=='FISCHL':
         moves['normal_move']={'name':'Arrow Throw'}
         moves['skill_move']={'name':'Summon Oz','usage':2}
@@ -4110,73 +4110,73 @@ def charamoves(x):
         moves['skill_move']={'name':'Electric field','usage': 2}
         moves['ult_move']={'name':'ELectro Staffing','cost':300,'video':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/f3607e292accc99c45107.mp4"
     if character['name']=='DIAN FARRELL':
         moves['normal_move']={'name':'Scratch'}
         moves['skill_move']={'name':'Rage !','usage': 2}
         moves['ult_move']={'name':'Rage Attacks','cost':250,'video':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/ffd53b7b0c83be2c5e29e.mp4"
     if character['name']=='KAYLA':
         moves['normal_move']={'name':'MAGIC'}
         moves['skill_move']={'name':'FLAME ENHANCE','usage': 1}
         moves['ult_move']={'name':'FLAME BURST','cost':250,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/e1f9f07500c4aa372468c.jpg"
     if character['name']=='KLAUDIA VALENTZ':
         moves['normal_move']={'name':'HIT'}
         moves['skill_move']={'name':'ICE HEAL !','usage':2}
         moves['ult_move']={'name':'FLOWER GARDEN','cost':250,'video':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/d789021ea8f520effb5e8.mp4"
     if character['name']=='LISA':
         moves['normal_move']={'name':'electric'}
         moves['skill_move']={'name':'ELECTRO AREA','usage': 2}
         moves['ult_move']={'name':'ELECTRO BURST','cost':300,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/2e9c0ba7ded74d8572f40.jpg"
     if character['name']=='DOOMFIST':
         moves['normal_move']={'name':'Fist Attack'}
         moves['skill_move']={'name':'DOOM SHOT !','usage': 1}
         moves['ult_move']={'name':'DOOM !!!','cost':250,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/3091e7f4da2a4ae072f09.jpg"
     if character['name']=='FIONA':
         moves['normal_move']={'name':'Slice'}
         moves['skill_move']={'name':'Sword Enhance !','usage': 2}
         moves['ult_move']={'name':'Water field','cost':300,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/bfbb738e4dc01456ba298.jpg"
     if character['name']=='RAIDEN SHOGUN':
         moves['normal_move']={'name':'STICK !'}
         moves['skill_move']={'name':'Lightning !','usage': 2}
         moves['ult_move']={'name':'ISLAND BREAKER : LIGHTNING','cost':300,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/95afd5c3c0b6ac666d788.mp4"
     if character['name']=='SEKIRO':
         moves['normal_move']={'name':'Slash'}
         moves['skill_move']={'name':'ELEMENTAL ENHANCE !','usage': 2}
         moves['ult_move']={'name':'BLOOD MASSACRE','cost':250,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/5074f880de6266de94d88.mp4"
     if character['name']=='BENNETT':
         moves['normal_move']={'name':'peck'}
         moves['skill_move']={'name':'Flame sword','usage': 3}
         moves['ult_move']={'name':'FLAME GROUND','cost':300,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/aab545190aac8ab32c3cd.jpg"
     if character['name']=='YUKONG':
         moves['normal_move']={'name':'Stance !'}
         moves['skill_move']={'name':'ATTACK Enhance !','usage': 2}
         moves['ult_move']={'name':'Water field','cost':250,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/edca1f2a2fe1ed02c0419.jpg"
     if character['name']=='CANDACE':
         moves['normal_move']={'name':'Knock'}
         moves['skill_move']={'name':'Shield !','usage': 1}
         moves['ult_move']={'name':'Shield burst','cost':250,'photo':None}
         moves['dodge_move']={'name':'DODGE','chances':character['speed']/10}
-        moves['media']=""
+        moves['media']="https://graph.org/file/70763a351e3187f846190.jpg"
     return moves
 
 def bot_status(update,context):
@@ -4998,11 +4998,8 @@ def pvp_battle_handler(update,context):
         if user_1_id_team[f'team_player_{1}']['speed']>user_2_id_team[f'team_player_{1}']['speed']:
             moves=charamoves(user_1_id_team[f"team_player_{1}"])
             keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_1_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_1_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_1_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_1_id}_{user_2_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_1_id}_{user_2_id}')]]
-            if user_1_id_team[f'team_player_{1}']['rank'] == 4 :
-                media_pvp="photo"
-            else:
-                media_pvp="video"
-            message=query.message.edit_text(f"*IT SEEMS *[{Player_1}](tg://user?id={user_1_id}) *{user_1_id_team[f'team_player_{1}']['name']} is Faster than *[{Player_2}](tg://user?id={user_2_id}) *{user_2_id_team[f'team_player_{1}']['name']}*\n\n[{Player_1}](tg://user?id={user_1_id}) :  *{user_1_id_team[f'team_player_{1}']['name']} [ {user_1_id_team[f'team_player_{1}']['element']} ]*\n`{user_1_id_team[f'team_player_{1}']['name']} HP : `*{user_1_id_team[f'team_player_{1}']['hp']}*\n\n[{Player_2}](tg://user?id={user_2_id}) :  *{user_2_id_team[f'team_player_{1}']['name']} [ {user_2_id_team[f'team_player_{1}']['element']} ]*\n`{user_2_id_team[f'team_player_{1}']['name']} HP : `*{user_2_id_team[f'team_player_{1}']['hp']}*\n\n[{Player_1}](tg://user?id={user_2_id}) *CHOOSE THE MOVE *[:]({user_1_id_team[f'team_player_{1}'][media_pvp]})",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
+            media_pvp=moves['media']
+            message=query.message.edit_text(f"*IT SEEMS *[{Player_1}](tg://user?id={user_1_id}) *{user_1_id_team[f'team_player_{1}']['name']} is Faster than *[{Player_2}](tg://user?id={user_2_id}) *{user_2_id_team[f'team_player_{1}']['name']}*\n\n[{Player_1}](tg://user?id={user_1_id}) :  *{user_1_id_team[f'team_player_{1}']['name']} [ {user_1_id_team[f'team_player_{1}']['element']} ]*\n`{user_1_id_team[f'team_player_{1}']['name']} HP : `*{user_1_id_team[f'team_player_{1}']['hp']}*\n\n[{Player_2}](tg://user?id={user_2_id}) :  *{user_2_id_team[f'team_player_{1}']['name']} [ {user_2_id_team[f'team_player_{1}']['element']} ]*\n`{user_2_id_team[f'team_player_{1}']['name']} HP : `*{user_2_id_team[f'team_player_{1}']['hp']}*\n\n[{Player_1}](tg://user?id={user_2_id}) *CHOOSE THE MOVE *[:]({media})",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
             message_id = message.message_id
             cd[message_id] = {}
             cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
@@ -5014,11 +5011,8 @@ def pvp_battle_handler(update,context):
         else:
             moves=charamoves(user_2_id_team[f"team_player_{1}"])
             keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_2_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_2_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_2_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_1_id}_{user_2_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_1_id}_{user_2_id}')]]
-            if user_2_id_team[f'team_player_{1}']['rank'] == 4 :
-                media_pvp="photo"
-            else:
-                media_pvp="video"
-            message=query.message.edit_text(f"*IT SEEMS *[{Player_2}](tg://user?id={user_2_id}) *{user_2_id_team[f'team_player_{1}']['name']} is Faster than *[{Player_1}](tg://user?id={user_1_id}) *{user_1_id_team[f'team_player_{1}']['name']}*\n\n[{Player_2}](tg://user?id={user_2_id}) :  *{user_2_id_team[f'team_player_{1}']['name']} [ {user_2_id_team[f'team_player_{1}']['element']} ]*\n`{user_2_id_team[f'team_player_{1}']['name']} HP : `*{user_2_id_team[f'team_player_{1}']['hp']}*\n\n[{Player_1}](tg://user?id={user_1_id}) :  *{user_1_id_team[f'team_player_{1}']['name']} [ {user_1_id_team[f'team_player_{1}']['element']} ]*\n`{user_1_id_team[f'team_player_{1}']['name']} HP : `*{user_1_id_team[f'team_player_{1}']['hp']}*\n\n[{Player_2}](tg://user?id={user_2_id}) *CHOOSE THE MOVE *[:]({user_2_id_team[f'team_player_{1}'][media_pvp]})",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
+            media_pvp=moves['media']
+            message=query.message.edit_text(f"*IT SEEMS *[{Player_2}](tg://user?id={user_2_id}) *{user_2_id_team[f'team_player_{1}']['name']} is Faster than *[{Player_1}](tg://user?id={user_1_id}) *{user_1_id_team[f'team_player_{1}']['name']}*\n\n[{Player_2}](tg://user?id={user_2_id}) :  *{user_2_id_team[f'team_player_{1}']['name']} [ {user_2_id_team[f'team_player_{1}']['element']} ]*\n`{user_2_id_team[f'team_player_{1}']['name']} HP : `*{user_2_id_team[f'team_player_{1}']['hp']}*\n\n[{Player_1}](tg://user?id={user_1_id}) :  *{user_1_id_team[f'team_player_{1}']['name']} [ {user_1_id_team[f'team_player_{1}']['element']} ]*\n`{user_1_id_team[f'team_player_{1}']['name']} HP : `*{user_1_id_team[f'team_player_{1}']['hp']}*\n\n[{Player_2}](tg://user?id={user_2_id}) *CHOOSE THE MOVE *[:]({media})",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
             message_id = message.message_id
             cd[message_id] = {}
             cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
@@ -5057,14 +5051,8 @@ def pvp_muu(update,context):
     Player_2=context.bot.getChat(user_2_id).first_name
     user_1_id_team = user_teams['user_1_team']
     user_2_id_team = user_teams['user_2_team']
-    if user_2_id_team[f'team_player_{user_2_player}']['rank'] == 4 :
-      media_pvp_2="photo"
-    else:
-      media_pvp_2="video"
-    if user_1_id_team[f'team_player_{user_1_player}']['rank'] == 4 :
-      media_pvp_1="photo"
-    else:
-      media_pvp_1="video"
+    media_pvp_2=charamoves(user_2_id_team[f"team_player_{player_no['user_1s_id']}"])['media']
+    media_pvp_1=charamoves(user_1_id_team[f"team_player_{player_no['user_2s_id']}"])['media']
     if query.data.split("_")[1] == "normal":
         if user.id != int(query.data.split('_')[2]):
             query.answer("NOT YOUR COMMAND NIGGA",show_alert=True)
@@ -5081,7 +5069,7 @@ def pvp_muu(update,context):
                     text1=""
                     text1+=f"*AS *[{Player_2}](tg://user?id={users['user_2_id']})* have already choosen the Attack\nNOW *[{Player_1}](tg://user?id={users['user_1_id']})* choose the attack you would like to do*"
                     text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{user_1_id_team[f'team_player_{user_1_player}']['name']} [ {user_1_id_team[f'team_player_{user_1_player}']['element']} ]*\n`{user_1_id_team[f'team_player_{user_1_player}']['name']} HP : `*{user_1_id_team[f'team_player_{user_1_player}']['hp']}*\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{user_2_id_team[f'team_player_{user_2_player}']['name']} [ {user_2_id_team[f'team_player_{user_2_player}']['element']} ]*\n`{user_2_id_team[f'team_player_{user_2_player}']['name']} HP : `*{user_2_id_team[f'team_player_{user_2_player}']['hp']}*"
-                    text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({user_1_id_team[f'team_player_{user_1_player}'][media_pvp_1]})"
+                    text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({media_pvp_1})"
                     message=query.message.edit_text(text1,reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                     message_id = message.message_id
                     cd[message_id] = {}
@@ -5098,7 +5086,7 @@ def pvp_muu(update,context):
                     text2=""
                     text2+=f"*AS *[{Player_1}](tg://user?id={users['user_1_id']})* have already choosen the Attack\nNOW *[{Player_2}](tg://user?id={users['user_2_id']})* choose the attack you would like to do*"
                     text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{user_2_id_team[f'team_player_{user_2_player}']['name']} [ {user_2_id_team[f'team_player_{user_2_player}']['element']} ]*\n`{user_2_id_team[f'team_player_{user_2_player}']['name']} HP : `*{user_2_id_team[f'team_player_{user_2_player}']['hp']}*\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{user_1_id_team[f'team_player_{user_1_player}']['name']} [ {user_1_id_team[f'team_player_{user_1_player}']['element']} ]*\n`{user_1_id_team[f'team_player_{user_1_player}']['name']} HP : `*{user_1_id_team[f'team_player_{user_1_player}']['hp']}*"
-                    text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move* [:]({user_2_id_team[f'team_player_{user_2_player}'][media_pvp_2]})"
+                    text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move* [:]({media_pvp_2})"
                     message=query.message.edit_text(text2,reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                     message_id = message.message_id
                     cd[message_id] = {}
@@ -5128,7 +5116,7 @@ def pvp_muu(update,context):
                     text1=""
                     text1+=f"*AS *[{Player_2}](tg://user?id={users['user_2_id']})* have already choosen the Attack\nNOW *[{Player_1}](tg://user?id={users['user_1_id']})* choose the attack you would like to do*"
                     text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{user_1_id_team[f'team_player_{user_1_player}']['name']} [ {user_1_id_team[f'team_player_{user_1_player}']['element']} ]*\n`{user_1_id_team[f'team_player_{user_1_player}']['name']} HP : `*{user_1_id_team[f'team_player_{user_1_player}']['hp']}*\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{user_2_id_team[f'team_player_{user_2_player}']['name']} [ {user_2_id_team[f'team_player_{user_2_player}']['element']} ]*\n`{user_2_id_team[f'team_player_{user_2_player}']['name']} HP : `*{user_2_id_team[f'team_player_{user_2_player}']['hp']}*"
-                    text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({user_1_id_team[f'team_player_{user_1_player}'][media_pvp_1]})"
+                    text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({media_pvp_1})"
                     message=query.message.edit_text(text1,reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                     message_id = message.message_id
                     cd[message_id] = {}
@@ -5145,7 +5133,7 @@ def pvp_muu(update,context):
                     text2=""
                     text2+=f"*AS *[{Player_1}](tg://user?id={users['user_1_id']})* have already choosen the Attack\nNOW *[{Player_2}](tg://user?id={users['user_2_id']})* choose the attack you would like to do*"
                     text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{user_2_id_team[f'team_player_{user_2_player}']['name']} [ {user_2_id_team[f'team_player_{user_2_player}']['element']} ]*\n`{user_2_id_team[f'team_player_{user_2_player}']['name']} HP : `*{user_2_id_team[f'team_player_{user_2_player}']['hp']}*\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{user_1_id_team[f'team_player_{user_1_player}']['name']} [ {user_1_id_team[f'team_player_{user_1_player}']['element']} ]*\n`{user_1_id_team[f'team_player_{user_1_player}']['name']} HP : `*{user_1_id_team[f'team_player_{user_1_player}']['hp']}*"
-                    text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move* [:]({user_2_id_team[f'team_player_{user_2_player}'][media_pvp_2]})"
+                    text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move* [:]({media_pvp_2})"
                     message=query.message.edit_text(text2,reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                     message_id = message.message_id
                     cd[message_id] = {}
@@ -5170,7 +5158,7 @@ def pvp_muu(update,context):
                 keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_1_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_1_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_1_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_1_id}_{user_2_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_1_id}_{user_2_id}')]]
                 text1+=f"*AS *[{Player_2}](tg://user?id={users['user_2_id']})* have already choosen the Attack\nNOW *[{Player_1}](tg://user?id={users['user_1_id']})* choose the attack you would like to do*"
                 text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{user_1_id_team[f'team_player_{user_1_player}']['name']} [ {user_1_id_team[f'team_player_{user_1_player}']['element']} ]*\n`{user_1_id_team[f'team_player_{user_1_player}']['name']} HP : `*{user_1_id_team[f'team_player_{user_1_player}']['hp']}*\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{user_2_id_team[f'team_player_{user_2_player}']['name']} [ {user_2_id_team[f'team_player_{user_2_player}']['element']} ]*\n`{user_2_id_team[f'team_player_{user_2_player}']['name']} HP : `*{user_2_id_team[f'team_player_{user_2_player}']['hp']}*"
-                text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({user_1_id_team[f'team_player_{user_1_player}'][media_pvp_1]})"
+                text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({media_pvp_1})"
                 message=query.message.edit_text(text1,reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                 message_id = message.message_id
                 cd[message_id] = {}
@@ -5184,7 +5172,7 @@ def pvp_muu(update,context):
                 keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_2_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_2_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_2_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_1_id}_{user_2_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_1_id}_{user_2_id}')]]
                 text2+=f"*AS *[{Player_1}](tg://user?id={users['user_1_id']})* have already choosen the Attack\nNOW *[{Player_2}](tg://user?id={users['user_2_id']})* choose the attack you would like to do*"
                 text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{user_2_id_team[f'team_player_{user_2_player}']['name']} [ {user_2_id_team[f'team_player_{user_2_player}']['element']} ]*\n`{user_2_id_team[f'team_player_{user_2_player}']['name']} HP : `*{user_2_id_team[f'team_player_{user_2_player}']['hp']}*\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{user_1_id_team[f'team_player_{user_1_player}']['name']} [ {user_1_id_team[f'team_player_{user_1_player}']['element']} ]*\n`{user_1_id_team[f'team_player_{user_1_player}']['name']} HP : `*{user_1_id_team[f'team_player_{user_1_player}']['hp']}*"
-                text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move* [:]({user_2_id_team[f'team_player_{user_2_player}'][media_pvp_2]})"
+                text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move* [:]({media_pvp_2})"
                 message=query.message.edit_text(text2,reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                 message_id = message.message_id
                 cd[message_id] = {}
@@ -5205,7 +5193,7 @@ def pvp_muu(update,context):
                     text1=""
                     text1+=f"*AS *[{Player_2}](tg://user?id={users['user_2_id']})* have already choosen the Attack\nNOW *[{Player_1}](tg://user?id={users['user_1_id']})* choose the attack you would like to do*"
                     text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{user_1_id_team[f'team_player_{user_1_player}']['name']} [ {user_1_id_team[f'team_player_{user_1_player}']['element']} ]*\n`{user_1_id_team[f'team_player_{user_1_player}']['name']} HP : `*{user_1_id_team[f'team_player_{user_1_player}']['hp']}*\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{user_2_id_team[f'team_player_{user_2_player}']['name']} [ {user_2_id_team[f'team_player_{user_2_player}']['element']} ]*\n`{user_2_id_team[f'team_player_{user_2_player}']['name']} HP : `*{user_2_id_team[f'team_player_{user_2_player}']['hp']}*"
-                    text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({user_1_id_team[f'team_player_{user_1_player}'][media_pvp_1]})"
+                    text1+=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({media_pvp_1})"
                     message=query.message.edit_text(text1,reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                     message_id = message.message_id
                     cd[message_id] = {}
@@ -5222,7 +5210,7 @@ def pvp_muu(update,context):
                     text2=""
                     text2+=f"*AS *[{Player_1}](tg://user?id={users['user_1_id']})* have already choosen the Attack\nNOW *[{Player_2}](tg://user?id={users['user_2_id']})* choose the attack you would like to do*"
                     text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{user_2_id_team[f'team_player_{user_2_player}']['name']} [ {user_2_id_team[f'team_player_{user_2_player}']['element']} ]*\n`{user_2_id_team[f'team_player_{user_2_player}']['name']} HP : `*{user_2_id_team[f'team_player_{user_2_player}']['hp']}*\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{user_1_id_team[f'team_player_{user_1_player}']['name']} [ {user_1_id_team[f'team_player_{user_1_player}']['element']} ]*\n`{user_1_id_team[f'team_player_{user_1_player}']['name']} HP : `*{user_1_id_team[f'team_player_{user_1_player}']['hp']}*"
-                    text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move* [:]({user_2_id_team[f'team_player_{user_2_player}'][media_pvp_2]})"
+                    text2+=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move* [:]({media_pvp_2})"
                     message=query.message.edit_text(text2,reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                     message_id = message.message_id
                     cd[message_id] = {}
@@ -5277,14 +5265,8 @@ def passer_pvp(update,context):
     char_of_2=user_teams['user_2_team']
     user_1_id_team = user_teams['user_1_team']
     user_2_id_team = user_teams['user_2_team']
-    if user_2_id_team[f'team_player_{user_2_player}']['rank'] == 4 :
-      media_pvp_2="photo"
-    else:
-      media_pvp_2="video"
-    if user_1_id_team[f'team_player_{user_1_player}']['rank'] == 4 :
-      media_pvp_1="photo"
-    else:
-      media_pvp_1="video"
+    media_pvp_2=charamoves(user_2_id_team[f"team_player_{player_no['user_1s_id']}"])['media']
+    media_pvp_1=charamoves(user_1_id_team[f"team_player_{player_no['user_2s_id']}"])['media']
     def_of_1=char_of_1[f'team_player_{user_1_player}']['def']
     def_of_2=char_of_2[f'team_player_{user_2_player}']['def']
     char_crit=[True,False]
@@ -5363,7 +5345,7 @@ def passer_pvp(update,context):
                     moves=charamoves(char_of_1[f"team_player_{user_1_player}"])
                     text1=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{char_of_1[f'team_player_{user_1_player}']['name']} [ {char_of_1[f'team_player_{user_1_player}']['element']} ]*\n`{char_of_1[f'team_player_{user_1_player}']['name']} HP : `*{char_of_1[f'team_player_{user_1_player}']['hp']}*\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{char_of_2[f'team_player_{user_2_player}']['name']} [ {char_of_2[f'team_player_{user_2_player}']['element']} ]*\n`{char_of_2[f'team_player_{user_2_player}']['name']} HP : `*{char_of_2[f'team_player_{user_2_player}']['hp']}*"
                     keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_1_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_1_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_1_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_1_id}_{user_2_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_1_id}_{user_2_id}')]]
-                    message=query.message.edit_text(text+text1+f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({user_1_id_team[f'team_player_{user_1_player}'][media_pvp_1]})",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
+                    message=query.message.edit_text(text+text1+f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({media_pvp_1})",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                     message_id = message.message_id
                     cd[message_id] = {}
                     cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
@@ -5429,7 +5411,7 @@ def passer_pvp(update,context):
                 moves=charamoves(char_of_2[f"team_player_{user_2_player}"])
                 text2=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{char_of_2[f'team_player_{user_2_player}']['name']} [ {char_of_2[f'team_player_{user_2_player}']['element']} ]*\n`{char_of_2[f'team_player_{user_2_player}']['name']} HP : `*{char_of_2[f'team_player_{user_2_player}']['hp']}*\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{char_of_1[f'team_player_{user_1_player}']['name']} [ {char_of_1[f'team_player_{user_1_player}']['element']} ]*\n`{char_of_1[f'team_player_{user_1_player}']['name']} HP : `*{char_of_1[f'team_player_{user_1_player}']['hp']}*"
                 keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_2_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_2_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_2_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_2_id}_{user_1_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_2_id}_{user_1_id}')]]
-                message=query.message.edit_text(text+text2+f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move* [:]({user_2_id_team[f'team_player_{user_2_player}'][media_pvp_2]})",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
+                message=query.message.edit_text(text+text2+f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move* [:]({media_pvp_2})",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
                 message_id = message.message_id
                 cd[message_id] = {}
                 cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
