@@ -2273,7 +2273,7 @@ def broadcast_all(update,context):
         for i in range(len(user_data[2].find_one()['user_ids'])):
             try:
                 user=context.bot.getChat(int(user_data[2].find_one()['user_ids'][i]))
-                context.bot.send_message(chat_id=int(user_data[2].find_one()['user_ids'][i]),text=f"*HELLO {user.first_name}\n\nTo think so it's been a long time that pso got any update\n\nHERE ARE SOME UPDATE FOR YOU :\n\nLet's introduce to our PVP system\nUSE /battle command to challenge anyone in @pso_main\nThis battle system is quite different than u think\nIt's called battle of speed and luck\n\nAND a most of the explore bugs are fixed\n\nIN next 2 days a limiter update will be passed which will make easier to grind*",parse_mode=ParseMode.MARKDOWN)
+                context.bot.send_message(chat_id=int(user_data[2].find_one()['user_ids'][i]),text=f"*HELLO {user.first_name}\n\nWe have something New for you\nWe made a manga channel where provide mangas which are really interesting to read\n\nIf you're interested in reading one then join the @manga_suggestion*",parse_mode=ParseMode.MARKDOWN)
             except:
                 gey+=1
         update.message.reply_text(f"Recieved User : {len(user_data[2].find_one()['user_ids'])-gey}\n\nGAYS : {gey}")
