@@ -87,9 +87,10 @@ def charobitan(update, context):
         if update.effective_user.id not in admins_id:
             try:
                 update.callback_query.message.edit_text("*BOT UNDER MAINTENANCE*",parse_mode=ParseMode.MARKDOWN)
+                return
             except:
                 update.callback_query.message.edit_caption(caption="*BOT UNDER MAINTENANCE*",parse_mode=ParseMode.MARKDOWN)
-            return
+                return
     query = update.callback_query.data
     global insiders 
     user=update.callback_query.from_user
@@ -5051,8 +5052,8 @@ def pvp_muu(update,context):
     Player_2=context.bot.getChat(user_2_id).first_name
     user_1_id_team = user_teams['user_1_team']
     user_2_id_team = user_teams['user_2_team']
-    media_pvp_2=charamoves(user_2_id_team[f"team_player_{player_no['user_1s_id']}"])['media']
-    media_pvp_1=charamoves(user_1_id_team[f"team_player_{player_no['user_2s_id']}"])['media']
+    media_pvp_2=charamoves(user_2_id_team[f"team_player_{player_no['user_2s_id']}"])['media']
+    media_pvp_1=charamoves(user_1_id_team[f"team_player_{player_no['user_1s_id']}"])['media']
     if query.data.split("_")[1] == "normal":
         if user.id != int(query.data.split('_')[2]):
             query.answer("NOT YOUR COMMAND NIGGA",show_alert=True)
@@ -5265,8 +5266,8 @@ def passer_pvp(update,context):
     char_of_2=user_teams['user_2_team']
     user_1_id_team = user_teams['user_1_team']
     user_2_id_team = user_teams['user_2_team']
-    media_pvp_2=charamoves(user_2_id_team[f"team_player_{player_no['user_1s_id']}"])['media']
-    media_pvp_1=charamoves(user_1_id_team[f"team_player_{player_no['user_2s_id']}"])['media']
+    media_pvp_2=charamoves(user_2_id_team[f"team_player_{player_no['user_2s_id']}"])['media']
+    media_pvp_1=charamoves(user_1_id_team[f"team_player_{player_no['user_1s_id']}"])['media']
     def_of_1=char_of_1[f'team_player_{user_1_player}']['def']
     def_of_2=char_of_2[f'team_player_{user_2_player}']['def']
     char_crit=[True,False]
