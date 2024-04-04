@@ -5949,9 +5949,9 @@ def trader(update,context):
     user=update.effective_user
     if user.id in [1864257459]:
         keyboard=[[InlineKeyboardButton('WEAPON',callback_data=f'fkjbsiebvs')],[InlineKeyboardButton('ARTIFACTS',callback_data=f'fkjbsiebvs')]]
-        update.message.reply_text("*Select the product type you want to trade :*",,parse_mode=ParseMode.MARKDOWN)
+        update.message.reply_text("*Select the product type you want to trade :*",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
         return
-    update.message.reply_text("*Command under construction*",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
+    update.message.reply_text("*Command under construction*",parse_mode=ParseMode.MARKDOWN)
     return
 
 def main():
