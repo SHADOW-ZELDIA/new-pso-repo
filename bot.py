@@ -5225,8 +5225,6 @@ def pvp_muu(update,context):
         if rool_aa == 0 :
             passer_pvp(update,context)
             return
-    elif query.data.splot("_")[1] == "skill":
-        print("wokring")
     elif query.data.split("_")[1] == "withdraw":
         if user.id == user_1_id or user.id == user_2_id :
             if user_1_id in insiders :
@@ -5238,6 +5236,8 @@ def pvp_muu(update,context):
         else:
             query.answer("OUTSIDER NIGGA",show_alert=True)
             return
+    elif query.data.splot("_")[1] == "skill":
+        print("wokring")
 
 def passer_pvp(update,context):
     global insiders
