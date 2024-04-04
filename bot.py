@@ -5798,9 +5798,32 @@ def passer_pvp(update,context):
         cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
         cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
         return
+    elif move[f"user_{user_1_id}_move"].split("_")[0]=="normal" and move[f"user_{user_2_id}_move"]=="skill" :
+        query.message.edit_text("*4th pass working*",parse_mode=ParseMode.MARKDOWN)
+        return
+    elif move[f"user_{user_1_id}_move"].split("_")[0]=="skill" and move[f"user_{user_2_id}_move"]=="skill" :
+        query.message.edit_text("*4th pass working*",parse_mode=ParseMode.MARKDOWN)
+        return
+    elif move[f"user_{user_1_id}_move"].split("_")[0]=="dodge" and move[f"user_{user_2_id}_move"]=="skill" :
+        query.message.edit_text("*4th pass working*",parse_mode=ParseMode.MARKDOWN)
+        return
+    elif move[f"user_{user_1_id}_move"].split("_")[0]=="swap" and move[f"user_{user_2_id}_move"]=="skill" :
+        query.message.edit_text("*4th pass working*",parse_mode=ParseMode.MARKDOWN)
+        return
+    elif move[f"user_{user_1_id}_move"].split("_")[0]=="skill" and move[f"user_{user_2_id}_move"]=="noraml" :
+        query.message.edit_text("*4th pass working*",parse_mode=ParseMode.MARKDOWN)
+        return
+    elif move[f"user_{user_1_id}_move"].split("_")[0]=="skill" and move[f"user_{user_2_id}_move"]=="skill" :
+        query.message.edit_text("*4th pass working*",parse_mode=ParseMode.MARKDOWN)
+        return
+    elif move[f"user_{user_1_id}_move"].split("_")[0]=="skill" and move[f"user_{user_2_id}_move"]=="dodge" :
+        query.message.edit_text("*4th pass working*",parse_mode=ParseMode.MARKDOWN)
+        return
+    elif move[f"user_{user_1_id}_move"].split("_")[0]=="skill" and move[f"user_{user_2_id}_move"]=="swap" :
+        query.message.edit_text("*4th pass working*",parse_mode=ParseMode.MARKDOWN)
+        return
     query.message.edit_text("*4th pass working*",parse_mode=ParseMode.MARKDOWN)
     return
-
 def pvp_swap_mou(update,context):
     global insiders
     if maintenance_mode == "ON":
