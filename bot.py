@@ -5945,6 +5945,10 @@ def check_dta(update,context):
     else:
         update.message.reply_text("*NOT YOUR COMMAND*",parse_mode=ParseMode.MARKDOWN)
 
+def trader(update,context):
+    user=update.effective_user
+    update.message.reply_text("*Command under construction*",parse_mode=ParseMode.MARKDOWN)
+
 def main():
     updater = Updater(API_KEY,use_context=True)
     dp = updater.dispatcher
@@ -5978,7 +5982,8 @@ def main():
     dp.add_handler(CommandHandler("kingdoms",kingdom_adder,run_async=True))
     dp.add_handler(CommandHandler("battle",battle_maker,run_async=True))
     dp.add_handler(CommandHandler("update_data",check_dta,run_async=True))
-    
+    dp.add_handler(CommandHandler("trade",trader,run_async=True))
+
     
     CHANGE_WEAPON_HANDLER = ConversationHandler(entry_points=[CallbackQueryHandler(change_weapon, pattern= f'change_weapon',run_async=True),CallbackQueryHandler(char_info, pattern= f'charinfo',run_async=True),CallbackQueryHandler(store_inline, pattern= f'mfstore',run_async=True),CallbackQueryHandler(primo_and_star_store, pattern= f'starstore',run_async=True),CallbackQueryHandler(purchase_maker_1, pattern= f'purchasemaker',run_async=True)],
         states={CHANGE_WEAPON:[CallbackQueryHandler(weapon_changed, pattern= 'weapon-(\d+)',run_async=True)]},
