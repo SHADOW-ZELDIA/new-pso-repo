@@ -4970,8 +4970,6 @@ def pvp_battle_handler(update,context):
                         user_1_id_team[f'team_player_{i+1}']['atk']+=round(user_1_id_team[f'team_player_{i+1}']['weapon'][0]['buff_atk'])
                         user_1_id_team[f'team_player_{i+1}']['dead']='False'
                 user_1_player_name=user_1_id_team[f'team_player_{i+1}']['name']
-                user_1_char_skil[f'{user_1_player_name}']={}
-                user_1_char_skil[f'{user_1_player_name}']['rounds']=0
             if user_2_id_team[f'team_player_{i+1}']['name']=='None':
                 if_not_2-=1
             else:
@@ -4981,8 +4979,6 @@ def pvp_battle_handler(update,context):
                         user_2_id_team[f'team_player_{i+1}']['atk']+=round(user_2_id_team[f'team_player_{i+1}']['weapon'][0]['buff_atk'])
                         user_2_id_team[f'team_player_{i+1}']['dead']='False'
                 user_2_player_name=user_2_id_team[f'team_player_{i+1}']['name']
-                user_2_char_skil[f'{user_2_player_name}']={}
-                user_2_char_skil[f'{user_2_player_name}']['rounds']=0
         if if_not_1<1 or if_not_2<1:
             if if_not_1<1 :
                 query.message.edit_text(f"[{Player_1}](tg://user?id={user_1_id}) *TEAM NOT SET*",parse_mode=ParseMode.MARKDOWN)
@@ -5018,7 +5014,7 @@ def pvp_battle_handler(update,context):
             cd[message_id] = {}
             cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
             cd[message_id]['teams']={"user_1_team":user_1_id_team,"user_2_team":user_2_id_team}
-            cd[message_id]['passive']={"user_1_pass":user_1_char_skil,"user_2_pass":user_2_char_skil}
+            cd[message_id]['passive']={"user_1_pass":{'amnt':0,'skill':{}},"user_2_pass":{'amnt':0,'skill':{}}}
             cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
             cd[message_id]['pvp_player_no']={"user_1s_id":1,"user_2s_id":1}
             return
@@ -5236,7 +5232,7 @@ def pvp_muu(update,context):
         else:
             query.answer("OUTSIDER NIGGA",show_alert=True)
             return
-    elif query.data.splot("_")[1] == "skill":
+    elif query.data.split("_")[1] == "skill":
         if user.id != int(query.data.split('_')[2]):
             query.answer("NOT YOUR COMMAND NIGGA",show_alert=True)
             return
@@ -5829,7 +5825,6 @@ def passer_pvp(update,context):
                 cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
                 return
             else:
-                char_of_1[f'team_player_{user_1_player}']['hp']-=char_2_dmg
                 if char_of_1[f'team_player_{user_1_player}']['hp']<1:
                     char_of_1[f'team_player_{user_1_player}']['dead']='True'
                     keyboard1=[]
