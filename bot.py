@@ -5329,8 +5329,6 @@ def passer_pvp(update,context):
         char_2_dmg=char_of_2[f'team_player_{user_2_player}']['atk']
         text+=""
     if move[f"user_{user_1_id}_move"]=="normal" and move[f"user_{user_2_id}_move"]=="normal":
-        player_gota_1=char_of_1[f'team_player_{user_1_player}']
-        player_gota_2=char_of_2[f'team_player_{user_2_player}']
         if char_of_1[f'team_player_{user_1_player}']['speed'] > char_of_2[f'team_player_{user_2_player}']['speed']:
             char_of_2[f'team_player_{user_2_player}']['hp']-=char_1_dmg
             text+=f"*\n{char_of_1[f'team_player_{user_1_player}']['name']} Dealt {char_1_dmg} to {char_of_2[f'team_player_{user_2_player}']['name']}*"
@@ -5794,9 +5792,7 @@ def passer_pvp(update,context):
         cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
         cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
         return
-    elif move[f"user_{user_1_id}_move"].split("_")[0]=="normal" and move[f"user_{user_2_id}_move"]=="skill" :
-        player_gota_1=char_of_1[f'team_player_{user_1_player}']
-        player_gota_2=char_of_2[f'team_player_{user_2_player}']
+    elif move[f"user_{user_1_id}_move"].split("_")[0]=="normal" and move[f"user_{user_2_id}_move"]=="skill":
         if char_of_1[f'team_player_{user_1_player}']['speed'] > char_of_2[f'team_player_{user_2_player}']['speed']:
             char_of_2[f'team_player_{user_2_player}']['hp']-=char_1_dmg
             text+=f"*\n{char_of_1[f'team_player_{user_1_player}']['name']} Dealt {char_1_dmg} to {char_of_2[f'team_player_{user_2_player}']['name']}*"
