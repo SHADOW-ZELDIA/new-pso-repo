@@ -6094,8 +6094,19 @@ def check_dta(update,context):
 
 def trader(update,context):
     user=update.effective_user
-    if user.id in [1864257459]:
+    if user.id in [1864257459,6509179750]:
         keyboard=[[InlineKeyboardButton('WEAPON',callback_data=f'fkjbsiebvs'),InlineKeyboardButton('ARTIFACTS',callback_data=f'fkjbsiebvs')]]
+        try:
+            replied_user=update.message.reply_to_message.from_user
+        except:
+            update.message.reply_text("*Reply To A User*",parse_mode=ParseMode.MARKDOWN)
+            return
+        if replied_user==user.id :
+            update.message.reply_text("_Tryna trade with yourself_\n*Very smart*\n*but that's not possible*",parse_mode=ParseMode.MARKDOWN)
+            return
+        if replied_user==6149996968:
+            update.message.reply_text("_Tryna trade with Me_\n*Very smart*\n*but that's not possible*",parse_mode=ParseMode.MARKDOWN)
+            return
         update.message.reply_text("*Select the product type you want to trade :*",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
         return
     update.message.reply_text("*Command under construction*",parse_mode=ParseMode.MARKDOWN)
