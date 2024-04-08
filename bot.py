@@ -1,4 +1,4 @@
-API_KEY = '6149996968:AAHjfT6t-6wxjUPgTGiPZqgkk9ZcOG3iOnA'
+API_KEY = '6759114451:AAGWHSxbJGZwP_a4OFrREL-eDVUGyXVYm0U'
 uri = "mongodb+srv://shadow_userbot:1976abcd?@shadowbot.jcgbzsl.mongodb.net/?retryWrites=true&w=majority"
 from telegram import *
 from telegram.ext import *
@@ -4944,7 +4944,7 @@ def pvp_battle_handler(update,context):
             user_1_characters[ij1]['atk']+=round(buff_level*0.8)
             user_1_characters[ij1]['def']+=round(buff_level*0.5)
             user_1_characters[ij1]['hp']+=round(buff_level*8)
-            user_1_characters[ij1]['new_hp']=user_1_characters[ij1]['hp']
+            user_1_characters[ij1]['old_hp']=user_1_characters[ij1]['hp']
             if user_1_characters[ij1]['name']=="SEKIRO":
                 user_1_characters[ij1]['immortality']=1
         for ij2 in range(len(user_2_characters)):
@@ -4953,7 +4953,7 @@ def pvp_battle_handler(update,context):
             user_2_characters[ij2]['atk']+=round(buff_level*0.8)
             user_2_characters[ij2]['def']+=round(buff_level*0.5)
             user_2_characters[ij2]['hp']+=round(buff_level*8)
-            user_2_characters[ij2]['new_hp']=user_2_characters[ij2]['hp']
+            user_2_characters[ij2]['old_hp']=user_2_characters[ij2]['hp']
             if user_2_characters[ij2]['name']=="SEKIRO":
                 user_2_characters[ij2]['immortality']=1
         if_not_1=4
@@ -5821,6 +5821,389 @@ def passer_pvp(update,context):
                 cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
                 return
             else:
+                moves=charamoves(char_of_2[f"team_player_{user_2_player}"])
+                if chara_skill_checker(char_of_2[f'team_player_{user_2_player}']['name'])['type'] == 'atk':
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='KRATOS':
+                        char_crit=[True,False]
+                        char2_possible=random.choices(char_crit,weights=(char_of_2[f'team_player_{user_2_player}']['crit_rate'],100-char_of_2[f'team_player_{user_2_player}']['crit_rate']),k=1)
+                        if char2_possible[0]==True:
+                            text+=f"\n{(char_of_2[f'team_player_{user_2_player}']['name']).upper()} HIT CRIT"
+                            char_2_dmg=round((char_of_2[f'team_player_{user_2_player}']['atk'])+((+char_of_2[f'team_player_{user_2_player}']['atk'])*char_of_2[f'team_player_{user_2_player}']['crit_dmg']/100))
+                        else:
+                            char_2_dmg=char_of_2[f'team_player_{user_2_player}']['atk']
+                            text+=""
+                        char_of_1[f'team_player_{user_1_player}']['hp']-=round(char_2_dmg*1.5)
+                        text+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Dealt {round(char_2_dmg*1.5)} to {char_of_1[f'team_player_{user_1_player}']['name']} by using {moves['skill_move']['name']}*"
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='DOOMFIST':
+                        char_crit=[True,False]
+                        char2_possible=random.choices(char_crit,weights=(char_of_2[f'team_player_{user_2_player}']['crit_rate'],100-char_of_2[f'team_player_{user_2_player}']['crit_rate']),k=1)
+                        if char2_possible[0]==True:
+                            text+=f"\n{(char_of_2[f'team_player_{user_2_player}']['name']).upper()} HIT CRIT"
+                            char_2_dmg=round((char_of_2[f'team_player_{user_2_player}']['atk'])+((+char_of_2[f'team_player_{user_2_player}']['atk'])*char_of_2[f'team_player_{user_2_player}']['crit_dmg']/100))
+                        else:
+                            char_2_dmg=char_of_2[f'team_player_{user_2_player}']['atk']
+                            text+=""
+                        char_of_1[f'team_player_{user_1_player}']['hp']-=round(char_2_dmg*1.45)
+                        text+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Dealt {round(char_2_dmg*1.5)} to {char_of_1[f'team_player_{user_1_player}']['name']} by using {moves['skill_move']['name']}*"
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='BENNETT':
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'benny_fire':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=1
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['benny_fire']=round(char_2_dmg/5)
+                        char_crit=[True,False]
+                        char2_possible=random.choices(char_crit,weights=(char_of_2[f'team_player_{user_2_player}']['crit_rate'],100-char_of_2[f'team_player_{user_2_player}']['crit_rate']),k=1)
+                        if char2_possible[0]==True:
+                            text+=f"\n{(char_of_2[f'team_player_{user_2_player}']['name']).upper()} HIT CRIT"
+                            char_2_dmg=round((char_of_2[f'team_player_{user_2_player}']['atk'])+((+char_of_2[f'team_player_{user_2_player}']['atk'])*char_of_2[f'team_player_{user_2_player}']['crit_dmg']/100))
+                        else:
+                            char_2_dmg=char_of_2[f'team_player_{user_2_player}']['atk']
+                            text+=""
+                        char_of_1[f'team_player_{user_1_player}']['hp']-=round(char_2_dmg)
+                        text+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Dealt {round(char_2_dmg*1.5)} to {char_of_1[f'team_player_{user_1_player}']['name']} by using {moves['skill_move']['name']}*"
+                    if char_of_1[f'team_player_{user_1_player}']['hp']<1:
+                        char_of_1[f'team_player_{user_1_player}']['dead']='True'
+                        keyboard1=[]
+                        for s in range(4):
+                            if char_of_1[f'team_player_{s+1}']['name']!='None':
+                                if char_of_1[f'team_player_{s+1}']['dead']=='False':
+                                    if char_of_1[f'team_player_{s+1}']['name']!=char_of_1[f'team_player_{user_1_player}']['name']:
+                                        keyboard1.append([InlineKeyboardButton(f"{char_of_1[f'team_player_{s+1}']['name']}",callback_data=f'pvpmuu_saprad_{s+1}_{user_1_id}')])    
+                        if len(keyboard1) < 1 :
+                            query.message.edit_text(text+f"\n\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\nAND [{Player_1}](tg://user?id={user_1_id}) is defeated by [{Player_2}](tg://user?id={user_2_id})",parse_mode=ParseMode.MARKDOWN)
+                            if user_1_id in insiders :
+                                insiders.remove(user_1_id)
+                            if user_2_id in insiders :
+                                insiders.remove(user_2_id)
+                            return
+                        message=query.message.edit_text(text+f"\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\n[{Player_1}](tg://user?id={user_1_id})* Choose your next character* [:](https://graph.org/file/63200ce7823c4f3a4062f.mp4)",reply_markup=InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
+                        message_id = message.message_id
+                        cd[message_id] = {}
+                        cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                        cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                        cd[message_id]['passive']=user_passive
+                        cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                        cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
+                        return
+                    else:
+                        moves=charamoves(char_of_1[f"team_player_{user_1_player}"])
+                        text1=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{char_of_1[f'team_player_{user_1_player}']['name']} [ {char_of_1[f'team_player_{user_1_player}']['element']} ]*\n`{char_of_1[f'team_player_{user_1_player}']['name']} HP : `*{char_of_1[f'team_player_{user_1_player}']['hp']}*\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{char_of_2[f'team_player_{user_2_player}']['name']} [ {char_of_2[f'team_player_{user_2_player}']['element']} ]*\n`{char_of_2[f'team_player_{user_2_player}']['name']} HP : `*{char_of_2[f'team_player_{user_2_player}']['hp']}*"
+                        keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_1_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_1_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_1_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_1_id}_{user_2_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_1_id}_{user_2_id}')]]
+                        message=query.message.edit_text(text+text1+f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({media_pvp_1})",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
+                        message_id = message.message_id
+                        cd[message_id] = {}
+                        cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                        cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                        cd[message_id]['passive']=user_passive
+                        cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                        cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
+                        return
+                elif chara_skill_checker(char_of_2[f'team_player_{user_2_player}']['name'])['type'] == 'current':
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='JEAN':
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'jean_dan':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=1
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['jean_dan']=round(char_2_dmg/5)
+                        char_crit=[True,False]
+                        char2_possible=random.choices(char_crit,weights=(char_of_2[f'team_player_{user_2_player}']['crit_rate'],100-char_of_2[f'team_player_{user_2_player}']['crit_rate']),k=1)
+                        if char2_possible[0]==True:
+                            text+=f"\n{(char_of_2[f'team_player_{user_2_player}']['name']).upper()} HIT CRIT"
+                            char_2_dmg=round((char_of_2[f'team_player_{user_2_player}']['atk'])+((+char_of_2[f'team_player_{user_2_player}']['atk'])*char_of_2[f'team_player_{user_2_player}']['crit_dmg']/100))
+                        else:
+                            char_2_dmg=char_of_2[f'team_player_{user_2_player}']['atk']
+                            text+=""
+                        char_of_1[f'team_player_{user_1_player}']['hp']-=round(char_2_dmg*1.2)
+                        text+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Dealt {round(char_2_dmg*1.5)} to {char_of_1[f'team_player_{user_1_player}']['name']} by using {moves['skill_move']['name']}\nAnd opponent will be stuck for next 1 move*"
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='TIAN LANG':
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'tia_Speed':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['tia_Speed']=round(char_of_2[f'team_player_{user_2_player}']['speed']/2.5)
+                        char_crit=[True,False]
+                        char2_possible=random.choices(char_crit,weights=(char_of_2[f'team_player_{user_2_player}']['crit_rate'],100-char_of_2[f'team_player_{user_2_player}']['crit_rate']),k=1)
+                        if char2_possible[0]==True:
+                            text+=f"\n{(char_of_2[f'team_player_{user_2_player}']['name']).upper()} HIT CRIT"
+                            char_2_dmg=round((char_of_2[f'team_player_{user_2_player}']['atk'])+((+char_of_2[f'team_player_{user_2_player}']['atk'])*char_of_2[f'team_player_{user_2_player}']['crit_dmg']/100))
+                        else:
+                            char_2_dmg=char_of_2[f'team_player_{user_2_player}']['atk']
+                            text+=""
+                        char_of_1[f'team_player_{user_1_player}']['hp']-=round(char_2_dmg*1.2)
+                        text+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Dealt {round(char_2_dmg*1.5)} to {char_of_1[f'team_player_{user_1_player}']['name']} by using {moves['skill_move']['name']}*"
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='RAIDEN SHOGUN':
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rai_den':0,'rounds':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rai_den']=round(char_2_dmg*2.5)
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=10
+                        text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='SEKIRO':
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=1
+                        text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
+                    if char_of_1[f'team_player_{user_1_player}']['hp']<1:
+                        char_of_1[f'team_player_{user_1_player}']['dead']='True'
+                        keyboard1=[]
+                        for s in range(4):
+                            if char_of_1[f'team_player_{s+1}']['name']!='None':
+                                if char_of_1[f'team_player_{s+1}']['dead']=='False':
+                                    if char_of_1[f'team_player_{s+1}']['name']!=char_of_1[f'team_player_{user_1_player}']['name']:
+                                        keyboard1.append([InlineKeyboardButton(f"{char_of_1[f'team_player_{s+1}']['name']}",callback_data=f'pvpmuu_saprad_{s+1}_{user_1_id}')])    
+                        if len(keyboard1) < 1 :
+                            query.message.edit_text(text+f"\n\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\nAND [{Player_1}](tg://user?id={user_1_id}) is defeated by [{Player_2}](tg://user?id={user_2_id})",parse_mode=ParseMode.MARKDOWN)
+                            if user_1_id in insiders :
+                                insiders.remove(user_1_id)
+                            if user_2_id in insiders :
+                                insiders.remove(user_2_id)
+                            return
+                        message=query.message.edit_text(text+f"\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\n[{Player_1}](tg://user?id={user_1_id})* Choose your next character* [:](https://graph.org/file/63200ce7823c4f3a4062f.mp4)",reply_markup=InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
+                        message_id = message.message_id
+                        cd[message_id] = {}
+                        cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                        cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                        cd[message_id]['passive']=user_passive
+                        cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                        cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
+                        return
+                    else:
+                        moves=charamoves(char_of_1[f"team_player_{user_1_player}"])
+                        text1=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{char_of_1[f'team_player_{user_1_player}']['name']} [ {char_of_1[f'team_player_{user_1_player}']['element']} ]*\n`{char_of_1[f'team_player_{user_1_player}']['name']} HP : `*{char_of_1[f'team_player_{user_1_player}']['hp']}*\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{char_of_2[f'team_player_{user_2_player}']['name']} [ {char_of_2[f'team_player_{user_2_player}']['element']} ]*\n`{char_of_2[f'team_player_{user_2_player}']['name']} HP : `*{char_of_2[f'team_player_{user_2_player}']['hp']}*"
+                        keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_1_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_1_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_1_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_1_id}_{user_2_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_1_id}_{user_2_id}')]]
+                        message=query.message.edit_text(text+text1+f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({media_pvp_1})",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
+                        message_id = message.message_id
+                        cd[message_id] = {}
+                        cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                        cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                        cd[message_id]['passive']=user_passive
+                        cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                        cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
+                        return
+                else:
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='RYZA ( BETA CHAR )':
+                        text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=2
+                        cd[message_id]['passive']=user_passive
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='SHADOW ( BETA CHAR )':
+                        text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=9999
+                        cd[message_id]['passive']=user_passive
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='MORAX ( BETA CHAR )':
+                        text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'skill_def':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=4
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['skill_def']=round(char_of_2[f'team_player_{user_2_player}']['hp']*1/10)
+                        cd[message_id]['passive']=user_passive
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='CLAUDIA':
+                        text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'clau_dmg':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=2
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['clau_dmg']=round(char_2_dmg*1/4.9)
+                        cd[message_id]['passive']=user_passive
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='FISCHL':
+                        text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'fis_dmg':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=5
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['fis_dmg']=char_2_dmg
+                        cd[message_id]['passive']=user_passive
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='ECHO':
+                        text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                        cd[message_id]['passive']=user_passive
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='QIQI':
+                        text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'qiqi_hp':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['qiqi_hp']=char_of_2[f'team_player_{user_2_player}']['old_hp']
+                        cd[message_id]['passive']=user_passive
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='DIAN FARRELL':
+                        text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+2
+                        cd[message_id]['passive']=user_passive
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='KAYLA':
+                        text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                        cd[message_id]['passive']=user_passive
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='KLAUDIA VALENTZ':
+                        text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'klaudia_hp':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['klaudia_hp']=round(char_of_2[f'team_player_{user_2_player}']['old_hp']/5)
+                        cd[message_id]['passive']=user_passive
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='LISA':
+                        text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'area_dmg':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['area_dmg']=round(char_2_dmg)
+                        cd[message_id]['passive']=user_passive
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='FIONA':
+                        text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                        cd[message_id]['passive']=user_passive
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='YUKONG':
+                        text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=2
+                        cd[message_id]['passive']=user_passive
+                    if char_of_2[f'team_player_{user_2_player}']['name']=='LISA':
+                        text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                        user_passive['user_2_pass']['amnt']+=1
+                        try:
+                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'area_dmg':0}
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['area_dmg']=round(char_2_dmg)
+                        cd[message_id]['passive']=user_passive
+                    if char_of_1[f'team_player_{user_1_player}']['hp']<1:
+                        char_of_1[f'team_player_{user_1_player}']['dead']='True'
+                        keyboard1=[]
+                        for s in range(4):
+                            if char_of_1[f'team_player_{s+1}']['name']!='None':
+                                if char_of_1[f'team_player_{s+1}']['dead']=='False':
+                                    if char_of_1[f'team_player_{s+1}']['name']!=char_of_1[f'team_player_{user_1_player}']['name']:
+                                        keyboard1.append([InlineKeyboardButton(f"{char_of_1[f'team_player_{s+1}']['name']}",callback_data=f'pvpmuu_saprad_{s+1}_{user_1_id}')])    
+                        if len(keyboard1) < 1 :
+                            query.message.edit_text(text+f"\n\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\nAND [{Player_1}](tg://user?id={user_1_id}) is defeated by [{Player_2}](tg://user?id={user_2_id})",parse_mode=ParseMode.MARKDOWN)
+                            if user_1_id in insiders :
+                                insiders.remove(user_1_id)
+                            if user_2_id in insiders :
+                                insiders.remove(user_2_id)
+                            return
+                        message=query.message.edit_text(text+f"\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\n[{Player_1}](tg://user?id={user_1_id})* Choose your next character* [:](https://graph.org/file/63200ce7823c4f3a4062f.mp4)",reply_markup=InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
+                        message_id = message.message_id
+                        cd[message_id] = {}
+                        cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                        cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                        cd[message_id]['passive']=user_passive
+                        cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                        cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
+                        return
+                    else:
+                        moves=charamoves(char_of_1[f"team_player_{user_1_player}"])
+                        text1=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{char_of_1[f'team_player_{user_1_player}']['name']} [ {char_of_1[f'team_player_{user_1_player}']['element']} ]*\n`{char_of_1[f'team_player_{user_1_player}']['name']} HP : `*{char_of_1[f'team_player_{user_1_player}']['hp']}*\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{char_of_2[f'team_player_{user_2_player}']['name']} [ {char_of_2[f'team_player_{user_2_player}']['element']} ]*\n`{char_of_2[f'team_player_{user_2_player}']['name']} HP : `*{char_of_2[f'team_player_{user_2_player}']['hp']}*"
+                        keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_1_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_1_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_1_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_1_id}_{user_2_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_1_id}_{user_2_id}')]]
+                        message=query.message.edit_text(text+text1+f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({media_pvp_1})",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
+                        message_id = message.message_id
+                        cd[message_id] = {}
+                        cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                        cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                        cd[message_id]['passive']=user_passive
+                        cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                        cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
+                        return
+        else:
+            moves=charamoves(char_of_2[f"team_player_{user_2_player}"])
+            if chara_skill_checker(char_of_2[f'team_player_{user_2_player}']['name'])['type'] == 'atk':
+                if char_of_2[f'team_player_{user_2_player}']['name']=='KRATOS':
+                    char_crit=[True,False]
+                    char2_possible=random.choices(char_crit,weights=(char_of_2[f'team_player_{user_2_player}']['crit_rate'],100-char_of_2[f'team_player_{user_2_player}']['crit_rate']),k=1)
+                    if char2_possible[0]==True:
+                        text+=f"\n{(char_of_2[f'team_player_{user_2_player}']['name']).upper()} HIT CRIT"
+                        char_2_dmg=round((char_of_2[f'team_player_{user_2_player}']['atk'])+((+char_of_2[f'team_player_{user_2_player}']['atk'])*char_of_2[f'team_player_{user_2_player}']['crit_dmg']/100))
+                    else:
+                        char_2_dmg=char_of_2[f'team_player_{user_2_player}']['atk']
+                        text+=""
+                    char_of_1[f'team_player_{user_1_player}']['hp']-=round(char_2_dmg*1.5)
+                    text+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Dealt {round(char_2_dmg*1.5)} to {char_of_1[f'team_player_{user_1_player}']['name']} by using {moves['skill_move']['name']}*"
+                if char_of_2[f'team_player_{user_2_player}']['name']=='DOOMFIST':
+                    char_crit=[True,False]
+                    char2_possible=random.choices(char_crit,weights=(char_of_2[f'team_player_{user_2_player}']['crit_rate'],100-char_of_2[f'team_player_{user_2_player}']['crit_rate']),k=1)
+                    if char2_possible[0]==True:
+                        text+=f"\n{(char_of_2[f'team_player_{user_2_player}']['name']).upper()} HIT CRIT"
+                        char_2_dmg=round((char_of_2[f'team_player_{user_2_player}']['atk'])+((+char_of_2[f'team_player_{user_2_player}']['atk'])*char_of_2[f'team_player_{user_2_player}']['crit_dmg']/100))
+                    else:
+                        char_2_dmg=char_of_2[f'team_player_{user_2_player}']['atk']
+                        text+=""
+                    char_of_1[f'team_player_{user_1_player}']['hp']-=round(char_2_dmg*1.45)
+                    text+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Dealt {round(char_2_dmg*1.5)} to {char_of_1[f'team_player_{user_1_player}']['name']} by using {moves['skill_move']['name']}*"
+                if char_of_2[f'team_player_{user_2_player}']['name']=='BENNETT':
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'benny_fire':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=1
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['benny_fire']=round(char_2_dmg/5)
+                    char_crit=[True,False]
+                    char2_possible=random.choices(char_crit,weights=(char_of_2[f'team_player_{user_2_player}']['crit_rate'],100-char_of_2[f'team_player_{user_2_player}']['crit_rate']),k=1)
+                    if char2_possible[0]==True:
+                        text+=f"\n{(char_of_2[f'team_player_{user_2_player}']['name']).upper()} HIT CRIT"
+                        char_2_dmg=round((char_of_2[f'team_player_{user_2_player}']['atk'])+((+char_of_2[f'team_player_{user_2_player}']['atk'])*char_of_2[f'team_player_{user_2_player}']['crit_dmg']/100))
+                    else:
+                        char_2_dmg=char_of_2[f'team_player_{user_2_player}']['atk']
+                        text+=""
+                    char_of_1[f'team_player_{user_1_player}']['hp']-=round(char_2_dmg)
+                    text+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Dealt {round(char_2_dmg*1.5)} to {char_of_1[f'team_player_{user_1_player}']['name']} by using {moves['skill_move']['name']}*"
                 if char_of_1[f'team_player_{user_1_player}']['hp']<1:
                     char_of_1[f'team_player_{user_1_player}']['dead']='True'
                     keyboard1=[]
@@ -5846,7 +6229,31 @@ def passer_pvp(update,context):
                     cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
                     return
                 else:
-                    text+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Dealt {char_2_dmg} to {char_of_1[f'team_player_{user_1_player}']['name']}*"
+                    char_of_2[f'team_player_{user_2_player}']['hp']-=char_1_dmg
+                    if char_of_2[f'team_player_{user_2_player}']['hp']<1:
+                        char_of_2[f'team_player_{user_2_player}']['dead']='True'
+                        keyboard2=[]
+                        for p in range(4):
+                            if char_of_2[f'team_player_{p+1}']['name']!='None':
+                                if char_of_2[f'team_player_{p+1}']['dead']=='False':
+                                    if char_of_2[f'team_player_{p+1}']['name']!=char_of_2[f'team_player_{user_2_player}']['name']:
+                                        keyboard2.append([InlineKeyboardButton(f"{char_of_2[f'team_player_{p+1}']['name']}",callback_data=f'pvpmuu_saprad_{p+1}_{user_2_id}')])    
+                        if len(keyboard2) < 1 :
+                            query.message.edit_text(text+f"\n\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\nAND [{Player_2}](tg://user?id={user_2_id}) is defeated by [{Player_1}](tg://user?id={user_1_id})",parse_mode=ParseMode.MARKDOWN)
+                            if user_1_id in insiders :
+                                insiders.remove(user_1_id)
+                            if user_2_id in insiders :
+                                insiders.remove(user_2_id)
+                            return
+                        message=query.message.edit_text(text+f"\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\n[{Player_2}](tg://user?id={user_2_id})* Choose your next character* [:](https://graph.org/file/63200ce7823c4f3a4062f.mp4)",reply_markup=InlineKeyboardMarkup(keyboard2),parse_mode=ParseMode.MARKDOWN)
+                        message_id = message.message_id
+                        cd[message_id] = {}
+                        cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                        cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                        cd[message_id]['passive']=user_passive
+                        cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                        cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
+                        return
                     moves=charamoves(char_of_1[f"team_player_{user_1_player}"])
                     text1=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{char_of_1[f'team_player_{user_1_player}']['name']} [ {char_of_1[f'team_player_{user_1_player}']['element']} ]*\n`{char_of_1[f'team_player_{user_1_player}']['name']} HP : `*{char_of_1[f'team_player_{user_1_player}']['hp']}*\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{char_of_2[f'team_player_{user_2_player}']['name']} [ {char_of_2[f'team_player_{user_2_player}']['element']} ]*\n`{char_of_2[f'team_player_{user_2_player}']['name']} HP : `*{char_of_2[f'team_player_{user_2_player}']['hp']}*"
                     keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_1_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_1_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_1_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_1_id}_{user_2_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_1_id}_{user_2_id}')]]
@@ -5859,51 +6266,75 @@ def passer_pvp(update,context):
                     cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
                     cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
                     return
-        else:
-            char_of_1[f'team_player_{user_1_player}']['hp']-=char_2_dmg
-            text+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Dealt {char_2_dmg} to {char_of_1[f'team_player_{user_1_player}']['name']}*"
-            if char_of_1[f'team_player_{user_1_player}']['hp']<1:
-                char_of_1[f'team_player_{user_1_player}']['dead']='True'
-                keyboard1=[]
-                for s in range(4):
-                    if char_of_1[f'team_player_{s+1}']['name']!='None':
-                        if char_of_1[f'team_player_{s+1}']['dead']=='False':
-                            if char_of_1[f'team_player_{s+1}']['name']!=char_of_1[f'team_player_{user_1_player}']['name']:
-                                keyboard1.append([InlineKeyboardButton(f"{char_of_1[f'team_player_{s+1}']['name']}",callback_data=f'pvpmuu_saprad_{s+1}_{user_1_id}')])    
-                if len(keyboard1) < 1 :
-                    query.message.edit_text(text+f"\n\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\nAND [{Player_1}](tg://user?id={user_1_id}) is defeated by [{Player_2}](tg://user?id={user_2_id})",parse_mode=ParseMode.MARKDOWN)
-                    if user_1_id in insiders :
-                        insiders.remove(user_1_id)
-                    if user_2_id in insiders :
-                        insiders.remove(user_2_id)
-                    return
-                message=query.message.edit_text(text+f"\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\n[{Player_1}](tg://user?id={user_1_id})* Choose your next character* [:](https://graph.org/file/63200ce7823c4f3a4062f.mp4)",reply_markup=InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
-                message_id = message.message_id
-                cd[message_id] = {}
-                cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
-                cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
-                cd[message_id]['passive']=user_passive
-                cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
-                cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
-                return
-            else:
-                char_of_2[f'team_player_{user_2_player}']['hp']-=char_1_dmg
-                if char_of_2[f'team_player_{user_2_player}']['hp']<1:
-                    char_of_2[f'team_player_{user_2_player}']['dead']='True'
-                    keyboard2=[]
-                    for p in range(4):
-                        if char_of_2[f'team_player_{p+1}']['name']!='None':
-                            if char_of_2[f'team_player_{p+1}']['dead']=='False':
-                                if char_of_2[f'team_player_{p+1}']['name']!=char_of_2[f'team_player_{user_2_player}']['name']:
-                                    keyboard2.append([InlineKeyboardButton(f"{char_of_2[f'team_player_{p+1}']['name']}",callback_data=f'pvpmuu_saprad_{p+1}_{user_2_id}')])    
-                    if len(keyboard2) < 1 :
-                        query.message.edit_text(text+f"\n\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\nAND [{Player_2}](tg://user?id={user_2_id}) is defeated by [{Player_1}](tg://user?id={user_1_id})",parse_mode=ParseMode.MARKDOWN)
+            elif chara_skill_checker(char_of_2[f'team_player_{user_2_player}']['name'])['type'] == 'current':
+                if char_of_2[f'team_player_{user_2_player}']['name']=='JEAN':
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'jean_dan':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=1
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['jean_dan']=round(char_2_dmg/5)
+                    char_crit=[True,False]
+                    char2_possible=random.choices(char_crit,weights=(char_of_2[f'team_player_{user_2_player}']['crit_rate'],100-char_of_2[f'team_player_{user_2_player}']['crit_rate']),k=1)
+                    if char2_possible[0]==True:
+                        text+=f"\n{(char_of_2[f'team_player_{user_2_player}']['name']).upper()} HIT CRIT"
+                        char_2_dmg=round((char_of_2[f'team_player_{user_2_player}']['atk'])+((+char_of_2[f'team_player_{user_2_player}']['atk'])*char_of_2[f'team_player_{user_2_player}']['crit_dmg']/100))
+                    else:
+                        char_2_dmg=char_of_2[f'team_player_{user_2_player}']['atk']
+                        text+=""
+                    char_of_1[f'team_player_{user_1_player}']['hp']-=round(char_2_dmg*1.2)
+                    text+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Dealt {round(char_2_dmg*1.5)} to {char_of_1[f'team_player_{user_1_player}']['name']} by using {moves['skill_move']['name']}\nAnd opponent will be stuck for next 1 move*"
+                if char_of_2[f'team_player_{user_2_player}']['name']=='TIAN LANG':
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'tia_Speed':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['tia_Speed']=round(char_of_2[f'team_player_{user_2_player}']['speed']/2.5)
+                    char_crit=[True,False]
+                    char2_possible=random.choices(char_crit,weights=(char_of_2[f'team_player_{user_2_player}']['crit_rate'],100-char_of_2[f'team_player_{user_2_player}']['crit_rate']),k=1)
+                    if char2_possible[0]==True:
+                        text+=f"\n{(char_of_2[f'team_player_{user_2_player}']['name']).upper()} HIT CRIT"
+                        char_2_dmg=round((char_of_2[f'team_player_{user_2_player}']['atk'])+((+char_of_2[f'team_player_{user_2_player}']['atk'])*char_of_2[f'team_player_{user_2_player}']['crit_dmg']/100))
+                    else:
+                        char_2_dmg=char_of_2[f'team_player_{user_2_player}']['atk']
+                        text+=""
+                    char_of_1[f'team_player_{user_1_player}']['hp']-=round(char_2_dmg*1.2)
+                    text+=f"*\n{char_of_2[f'team_player_{user_2_player}']['name']} Dealt {round(char_2_dmg*1.5)} to {char_of_1[f'team_player_{user_1_player}']['name']} by using {moves['skill_move']['name']}*"
+                if char_of_2[f'team_player_{user_2_player}']['name']=='RAIDEN SHOGUN':
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rai_den':0,'rounds':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rai_den']=round(char_2_dmg*2.5)
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=10
+                    text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
+                if char_of_2[f'team_player_{user_2_player}']['name']=='SEKIRO':
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=1
+                    text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
+                if char_of_1[f'team_player_{user_1_player}']['hp']<1:
+                    char_of_1[f'team_player_{user_1_player}']['dead']='True'
+                    keyboard1=[]
+                    for s in range(4):
+                        if char_of_1[f'team_player_{s+1}']['name']!='None':
+                            if char_of_1[f'team_player_{s+1}']['dead']=='False':
+                                if char_of_1[f'team_player_{s+1}']['name']!=char_of_1[f'team_player_{user_1_player}']['name']:
+                                    keyboard1.append([InlineKeyboardButton(f"{char_of_1[f'team_player_{s+1}']['name']}",callback_data=f'pvpmuu_saprad_{s+1}_{user_1_id}')])    
+                    if len(keyboard1) < 1 :
+                        query.message.edit_text(text+f"\n\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\nAND [{Player_1}](tg://user?id={user_1_id}) is defeated by [{Player_2}](tg://user?id={user_2_id})",parse_mode=ParseMode.MARKDOWN)
                         if user_1_id in insiders :
                             insiders.remove(user_1_id)
                         if user_2_id in insiders :
                             insiders.remove(user_2_id)
                         return
-                    message=query.message.edit_text(text+f"\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\n[{Player_2}](tg://user?id={user_2_id})* Choose your next character* [:](https://graph.org/file/63200ce7823c4f3a4062f.mp4)",reply_markup=InlineKeyboardMarkup(keyboard2),parse_mode=ParseMode.MARKDOWN)
+                    message=query.message.edit_text(text+f"\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\n[{Player_1}](tg://user?id={user_1_id})* Choose your next character* [:](https://graph.org/file/63200ce7823c4f3a4062f.mp4)",reply_markup=InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
                     message_id = message.message_id
                     cd[message_id] = {}
                     cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
@@ -5912,19 +6343,241 @@ def passer_pvp(update,context):
                     cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
                     cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
                     return
-                text+=f"*\n{char_of_1[f'team_player_{user_1_player}']['name']} Dealt {char_1_dmg} to {char_of_2[f'team_player_{user_2_player}']['name']}*"
-                moves=charamoves(char_of_2[f"team_player_{user_2_player}"])
-                text2=f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{char_of_2[f'team_player_{user_2_player}']['name']} [ {char_of_2[f'team_player_{user_2_player}']['element']} ]*\n`{char_of_2[f'team_player_{user_2_player}']['name']} HP : `*{char_of_2[f'team_player_{user_2_player}']['hp']}*\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{char_of_1[f'team_player_{user_1_player}']['name']} [ {char_of_1[f'team_player_{user_1_player}']['element']} ]*\n`{char_of_1[f'team_player_{user_1_player}']['name']} HP : `*{char_of_1[f'team_player_{user_1_player}']['hp']}*"
-                keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_2_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_2_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_2_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_2_id}_{user_1_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_2_id}_{user_1_id}')]]
-                message=query.message.edit_text(text+text2+f"\n\n[{Player_2}](tg://user?id={users['user_2_id']}) *choose the move* [:]({media_pvp_2})",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
-                message_id = message.message_id
-                cd[message_id] = {}
-                cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
-                cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
-                cd[message_id]['passive']=user_passive
-                cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
-                cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
-                return
+                else:
+                    char_of_2[f'team_player_{user_2_player}']['hp']-=char_1_dmg
+                    if char_of_2[f'team_player_{user_2_player}']['hp']<1:
+                        char_of_2[f'team_player_{user_2_player}']['dead']='True'
+                        keyboard2=[]
+                        for p in range(4):
+                            if char_of_2[f'team_player_{p+1}']['name']!='None':
+                                if char_of_2[f'team_player_{p+1}']['dead']=='False':
+                                    if char_of_2[f'team_player_{p+1}']['name']!=char_of_2[f'team_player_{user_2_player}']['name']:
+                                        keyboard2.append([InlineKeyboardButton(f"{char_of_2[f'team_player_{p+1}']['name']}",callback_data=f'pvpmuu_saprad_{p+1}_{user_2_id}')])    
+                        if len(keyboard2) < 1 :
+                            query.message.edit_text(text+f"\n\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\nAND [{Player_2}](tg://user?id={user_2_id}) is defeated by [{Player_1}](tg://user?id={user_1_id})",parse_mode=ParseMode.MARKDOWN)
+                            if user_1_id in insiders :
+                                insiders.remove(user_1_id)
+                            if user_2_id in insiders :
+                                insiders.remove(user_2_id)
+                            return
+                        message=query.message.edit_text(text+f"\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\n[{Player_2}](tg://user?id={user_2_id})* Choose your next character* [:](https://graph.org/file/63200ce7823c4f3a4062f.mp4)",reply_markup=InlineKeyboardMarkup(keyboard2),parse_mode=ParseMode.MARKDOWN)
+                        message_id = message.message_id
+                        cd[message_id] = {}
+                        cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                        cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                        cd[message_id]['passive']=user_passive
+                        cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                        cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
+                        return
+                    moves=charamoves(char_of_1[f"team_player_{user_1_player}"])
+                    text1=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{char_of_1[f'team_player_{user_1_player}']['name']} [ {char_of_1[f'team_player_{user_1_player}']['element']} ]*\n`{char_of_1[f'team_player_{user_1_player}']['name']} HP : `*{char_of_1[f'team_player_{user_1_player}']['hp']}*\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{char_of_2[f'team_player_{user_2_player}']['name']} [ {char_of_2[f'team_player_{user_2_player}']['element']} ]*\n`{char_of_2[f'team_player_{user_2_player}']['name']} HP : `*{char_of_2[f'team_player_{user_2_player}']['hp']}*"
+                    keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_1_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_1_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_1_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_1_id}_{user_2_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_1_id}_{user_2_id}')]]
+                    message=query.message.edit_text(text+text1+f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({media_pvp_1})",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
+                    message_id = message.message_id
+                    cd[message_id] = {}
+                    cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                    cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                    cd[message_id]['passive']=user_passive
+                    cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                    cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
+                    return
+            else:
+                if char_of_2[f'team_player_{user_2_player}']['name']=='RYZA ( BETA CHAR )':
+                    text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=2
+                    cd[message_id]['passive']=user_passive
+                if char_of_2[f'team_player_{user_2_player}']['name']=='SHADOW ( BETA CHAR )':
+                    text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=9999
+                    cd[message_id]['passive']=user_passive
+                if char_of_2[f'team_player_{user_2_player}']['name']=='MORAX ( BETA CHAR )':
+                    text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'skill_def':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=4
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['skill_def']=round(char_of_2[f'team_player_{user_2_player}']['hp']*1/10)
+                    cd[message_id]['passive']=user_passive
+                if char_of_2[f'team_player_{user_2_player}']['name']=='CLAUDIA':
+                    text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'clau_dmg':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=2
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['clau_dmg']=round(char_2_dmg*1/4.9)
+                    cd[message_id]['passive']=user_passive
+                if char_of_2[f'team_player_{user_2_player}']['name']=='FISCHL':
+                    text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'fis_dmg':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=5
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['fis_dmg']=char_2_dmg
+                    cd[message_id]['passive']=user_passive
+                if char_of_2[f'team_player_{user_2_player}']['name']=='ECHO':
+                    text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                    cd[message_id]['passive']=user_passive
+                if char_of_2[f'team_player_{user_2_player}']['name']=='QIQI':
+                    text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'qiqi_hp':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['qiqi_hp']=char_of_2[f'team_player_{user_2_player}']['old_hp']
+                    cd[message_id]['passive']=user_passive
+                if char_of_2[f'team_player_{user_2_player}']['name']=='DIAN FARRELL':
+                    text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+2
+                    cd[message_id]['passive']=user_passive
+                if char_of_2[f'team_player_{user_2_player}']['name']=='KAYLA':
+                    text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                    cd[message_id]['passive']=user_passive
+                if char_of_2[f'team_player_{user_2_player}']['name']=='KLAUDIA VALENTZ':
+                    text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'klaudia_hp':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['klaudia_hp']=round(char_of_2[f'team_player_{user_2_player}']['old_hp']/5)
+                    cd[message_id]['passive']=user_passive
+                if char_of_2[f'team_player_{user_2_player}']['name']=='LISA':
+                    text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'area_dmg':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['area_dmg']=round(char_2_dmg)
+                    cd[message_id]['passive']=user_passive
+                if char_of_2[f'team_player_{user_2_player}']['name']=='FIONA':
+                    text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                    cd[message_id]['passive']=user_passive
+                if char_of_2[f'team_player_{user_2_player}']['name']=='YUKONG':
+                    text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=2
+                    cd[message_id]['passive']=user_passive
+                if char_of_2[f'team_player_{user_2_player}']['name']=='LISA':
+                    text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
+                    user_passive['user_2_pass']['amnt']+=1
+                    try:
+                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                    except:
+                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'area_dmg':0}
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['area_dmg']=round(char_2_dmg)
+                    cd[message_id]['passive']=user_passive
+                if char_of_1[f'team_player_{user_1_player}']['hp']<1:
+                    char_of_1[f'team_player_{user_1_player}']['dead']='True'
+                    keyboard1=[]
+                    for s in range(4):
+                        if char_of_1[f'team_player_{s+1}']['name']!='None':
+                            if char_of_1[f'team_player_{s+1}']['dead']=='False':
+                                if char_of_1[f'team_player_{s+1}']['name']!=char_of_1[f'team_player_{user_1_player}']['name']:
+                                    keyboard1.append([InlineKeyboardButton(f"{char_of_1[f'team_player_{s+1}']['name']}",callback_data=f'pvpmuu_saprad_{s+1}_{user_1_id}')])    
+                    if len(keyboard1) < 1 :
+                        query.message.edit_text(text+f"\n\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\nAND [{Player_1}](tg://user?id={user_1_id}) is defeated by [{Player_2}](tg://user?id={user_2_id})",parse_mode=ParseMode.MARKDOWN)
+                        if user_1_id in insiders :
+                            insiders.remove(user_1_id)
+                        if user_2_id in insiders :
+                            insiders.remove(user_2_id)
+                        return
+                    message=query.message.edit_text(text+f"\n{char_of_1[f'team_player_{user_1_player}']['name']} is now dead\n\n[{Player_1}](tg://user?id={user_1_id})* Choose your next character* [:](https://graph.org/file/63200ce7823c4f3a4062f.mp4)",reply_markup=InlineKeyboardMarkup(keyboard1),parse_mode=ParseMode.MARKDOWN)
+                    message_id = message.message_id
+                    cd[message_id] = {}
+                    cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                    cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                    cd[message_id]['passive']=user_passive
+                    cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                    cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
+                    return
+                else:
+                    char_of_2[f'team_player_{user_2_player}']['hp']-=char_1_dmg
+                    if char_of_2[f'team_player_{user_2_player}']['hp']<1:
+                        char_of_2[f'team_player_{user_2_player}']['dead']='True'
+                        keyboard2=[]
+                        for p in range(4):
+                            if char_of_2[f'team_player_{p+1}']['name']!='None':
+                                if char_of_2[f'team_player_{p+1}']['dead']=='False':
+                                    if char_of_2[f'team_player_{p+1}']['name']!=char_of_2[f'team_player_{user_2_player}']['name']:
+                                        keyboard2.append([InlineKeyboardButton(f"{char_of_2[f'team_player_{p+1}']['name']}",callback_data=f'pvpmuu_saprad_{p+1}_{user_2_id}')])    
+                        if len(keyboard2) < 1 :
+                            query.message.edit_text(text+f"\n\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\nAND [{Player_2}](tg://user?id={user_2_id}) is defeated by [{Player_1}](tg://user?id={user_1_id})",parse_mode=ParseMode.MARKDOWN)
+                            if user_1_id in insiders :
+                                insiders.remove(user_1_id)
+                            if user_2_id in insiders :
+                                insiders.remove(user_2_id)
+                            return
+                        message=query.message.edit_text(text+f"\n{char_of_2[f'team_player_{user_2_player}']['name']} is now dead\n\n[{Player_2}](tg://user?id={user_2_id})* Choose your next character* [:](https://graph.org/file/63200ce7823c4f3a4062f.mp4)",reply_markup=InlineKeyboardMarkup(keyboard2),parse_mode=ParseMode.MARKDOWN)
+                        message_id = message.message_id
+                        cd[message_id] = {}
+                        cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                        cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                        cd[message_id]['passive']=user_passive
+                        cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                        cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
+                        return
+                    text+=f"*\n{char_of_1[f'team_player_{user_1_player}']['name']} Dealt {char_1_dmg} to {char_of_2[f'team_player_{user_2_player}']['name']}*"
+                    moves=charamoves(char_of_1[f"team_player_{user_1_player}"])
+                    text1=f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) :  *{char_of_1[f'team_player_{user_1_player}']['name']} [ {char_of_1[f'team_player_{user_1_player}']['element']} ]*\n`{char_of_1[f'team_player_{user_1_player}']['name']} HP : `*{char_of_1[f'team_player_{user_1_player}']['hp']}*\n\n[{Player_2}](tg://user?id={users['user_2_id']}) :  *{char_of_2[f'team_player_{user_2_player}']['name']} [ {char_of_2[f'team_player_{user_2_player}']['element']} ]*\n`{char_of_2[f'team_player_{user_2_player}']['name']} HP : `*{char_of_2[f'team_player_{user_2_player}']['hp']}*"
+                    keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_1_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_1_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_1_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_1_id}_{user_2_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_1_id}_{user_2_id}')]]
+                    message=query.message.edit_text(text+text1+f"\n\n[{Player_1}](tg://user?id={users['user_1_id']}) *choose the move* [:]({media_pvp_1})",reply_markup=InlineKeyboardMarkup(keyboard),parse_mode=ParseMode.MARKDOWN)
+                    message_id = message.message_id
+                    cd[message_id] = {}
+                    cd[message_id]['users']={"user_1_id":user_1_id,"user_2_id":user_2_id}
+                    cd[message_id]['teams']={"user_1_team":char_of_1,"user_2_team":char_of_2}
+                    cd[message_id]['passive']=user_passive
+                    cd[message_id]['move_done']={f"user_{user_1_id}_move":"",f"user_{user_2_id}_move":""}
+                    cd[message_id]['pvp_player_no']={"user_1s_id":user_1_player,"user_2s_id":user_2_player}
+                    return
     elif move[f"user_{user_1_id}_move"].split("_")[0]=="skill" and move[f"user_{user_2_id}_move"]=="skill" :
         query.message.edit_text("*4th pass working*",parse_mode=ParseMode.MARKDOWN)
         return
@@ -5948,6 +6601,52 @@ def passer_pvp(update,context):
         return
     query.message.edit_text("*4th pass working*",parse_mode=ParseMode.MARKDOWN)
     return
+
+def chara_skill_checker(character):
+    if character['name']=='RYZA ( BETA CHAR )':
+        end={'type':"later"}
+    if character['name']=='SHADOW ( BETA CHAR )':
+        end={'type':"later"}
+    if character['name']=='MORAX ( BETA CHAR )':
+        end={"type":"later"}
+    if character['name']=='KRATOS':
+        end={'type':"atk"}
+    if character['name']=='CLAUDIA':
+        end= {"type":"later"}
+    if character['name']=='FISCHL':
+        end={'type':"later"}
+    if character['name']=='ECHO':
+        end={'type':'later'}
+    if character['name']=='QIQI':
+        end={'type':"later"}
+    if character['name']=='JEAN':
+        end={'type':"current"}
+    if character['name']=='TIAN LANG':
+        end={'type':"current"}
+    if character['name']=='DIAN FARRELL':
+        end={'type':"later"}
+    if character['name']=='KAYLA':
+        end={'type':"later"}
+    if character['name']=='KLAUDIA VALENTZ':
+        end={'type':"later"}
+    if character['name']=='LISA':
+        end={'type':"later"}
+    if character['name']=='DOOMFIST':
+        end={'type':"atk"}
+    if character['name']=='FIONA':
+        end={'type':"later"}
+    if character['name']=='RAIDEN SHOGUN':
+        end={'type':"current"}
+    if character['name']=='SEKIRO':
+        end={'type':"current"}
+    if character['name']=='BENNETT':
+        end={'type':"atk"}
+    if character['name']=='YUKONG':
+        end={'type':"later"}
+    if character['name']=='CANDACE':
+        end={'type':"later"}
+    return end
+
 def pvp_swap_mou(update,context):
     global insiders
     if maintenance_mode == "ON":
