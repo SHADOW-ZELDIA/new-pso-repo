@@ -5243,6 +5243,13 @@ def pvp_muu(update,context):
                 if i+1 == 1 :
                     user_1_id_team = user_teams['user_1_team']
                     user_2_id_team = user_teams['user_2_team']
+                    if user_1_id_team[f"team_player_{player_no['user_1s_id']}"]['name']=='RAIDEN SHOGUN':
+                        try:
+                            raichar=user_passive['user_2_pass']['skill'][f'{user_2_id_team[f'team_player_{user_2_player}']['name']}']
+                        except:
+                            raichar=None
+                        if raichar != None:
+                            print("ok")
                     moves=charamoves(user_1_id_team[f"team_player_{player_no['user_1s_id']}"])
                     keyboard=[[InlineKeyboardButton(f"{moves['normal_move']['name']}",callback_data=f'pvpmu_normal_{user_1_id}')],[InlineKeyboardButton(f"{moves['skill_move']['name']}",callback_data=f'pvpmu_skill_{user_1_id}')],[InlineKeyboardButton(f"{moves['dodge_move']['name']}",callback_data=f'pvpmu_dodge_{user_1_id}'),InlineKeyboardButton(f"SWAP",callback_data=f'pvpmuu_swap_{user_1_id}'),InlineKeyboardButton(f"DRAW",callback_data=f'pvpmuu_draw_{user_1_id}_{user_2_id}')],[InlineKeyboardButton(f"WITHDRAW",callback_data=f'pvpmu_withdraw_{user_1_id}_{user_2_id}')]]
                     text1=""
@@ -5314,6 +5321,14 @@ def passer_pvp(update,context):
     def_of_1=char_of_1[f'team_player_{user_1_player}']['def']
     def_of_2=char_of_2[f'team_player_{user_2_player}']['def']
     char_crit=[True,False]
+    if len(list(user_passive['user_2_pass']['skill'].keys())) > 1 :
+        for jki in range(len(list(user_passive['user_2_pass']['skill'].keys()))-1):
+            crnt_char=list(user_passive['user_2_pass']['skill'].keys())[jki+1]
+            print(crnt_char)
+    if len(list(user_passive['user_1_pass']['skill'].keys())) > 1 :
+        for ikj in range(len(list(user_passive['user_1_pass']['skill'].keys()))-1):
+            crnt_char=list(user_passive['user_1_pass']['skill'].keys())[ikj+1]
+            print(crnt_char)
     char1_possible=random.choices(char_crit,weights=(char_of_1[f'team_player_{user_1_player}']['crit_rate'],100-char_of_1[f'team_player_{user_1_player}']['crit_rate']),k=1)
     char2_possible=random.choices(char_crit,weights=(char_of_2[f'team_player_{user_2_player}']['crit_rate'],100-char_of_2[f'team_player_{user_2_player}']['crit_rate']),k=1)
     if char1_possible[0]==True:
