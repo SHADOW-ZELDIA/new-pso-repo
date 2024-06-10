@@ -5865,7 +5865,7 @@ def passer_pvp(update,context):
                         try:
                             finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
-                            user_passive['user_2_pass']['skill'][f'{char_of_2[f"team_player_{user_2_player}']['name']}"]={'rounds':0,'benny_fire':0}
+                            user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'benny_fire':0}
                         user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=1
                         user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['benny_fire']=round(char_2_dmg/5)
                         char_crit=[True,False]
