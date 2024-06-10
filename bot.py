@@ -5863,7 +5863,7 @@ def passer_pvp(update,context):
                     if char_of_2[f'team_player_{user_2_player}']['name']=='BENNETT':
                         user_passive['user_2_pass']['amnt']+=1
                         try:
-                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                            finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
                             user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'benny_fire':0}
                         user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=1
