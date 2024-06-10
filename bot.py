@@ -5245,7 +5245,7 @@ def pvp_muu(update,context):
                     user_2_id_team = user_teams['user_2_team']
                     if user_1_id_team[f"team_player_{player_no['user_1s_id']}"]['name']=='RAIDEN SHOGUN':
                         try:
-                            raichar=user_passive['user_2_pass']['skill'][f'{user_2_id_team[f'team_player_{user_2_player}']['name']}']
+                            raichar=user_passive['user_2_pass']['skill'][f"{user_2_id_team[f'team_player_{user_2_player}"]['name']}']
                         except:
                             raichar=None
                         if raichar != None:
