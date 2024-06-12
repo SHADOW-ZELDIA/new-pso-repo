@@ -2,7 +2,7 @@ API_KEY = '6759114451:AAGWHSxbJGZwP_a4OFrREL-eDVUGyXVYm0U'
 uri = "mongodb+srv://shadow_userbot:1976abcd?@shadowbot.jcgbzsl.mongodb.net/?retryWrites=true&w=majority"
 from telegram import *
 from telegram.ext import *
-import random , logging , html , char , datetime , pymongo , asyncio , time , monster , os , PIL , pytz , quests 
+import random , logging , html , char , datetime , pymongo , asyncio , time , monster , os , PIL , quests 
 from pymongo.mongo_client import MongoClient
 from bson.objectid import ObjectId
 from pymongo.server_api import ServerApi
@@ -5954,7 +5954,7 @@ def passer_pvp(update,context):
                     if char_of_2[f'team_player_{user_2_player}']['name']=='RAIDEN SHOGUN':
                         user_passive['user_2_pass']['amnt']+=1
                         try:
-                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                            finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
                             user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rai_den':0,'rounds':0}
                         user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rai_den']=round(char_2_dmg*2.5)
@@ -6012,132 +6012,132 @@ def passer_pvp(update,context):
                         try:
                             finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
-                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=2
+                            user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0}
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=2
                         cd[message_id]['passive']=user_passive
                     if char_of_2[f'team_player_{user_2_player}']['name']=='SHADOW ( BETA CHAR )':
                         text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
                         user_passive['user_2_pass']['amnt']+=1
                         try:
-                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                            finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
-                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=9999
+                            user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0}
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=9999
                         cd[message_id]['passive']=user_passive
                     if char_of_2[f'team_player_{user_2_player}']['name']=='MORAX ( BETA CHAR )':
                         text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
                         user_passive['user_2_pass']['amnt']+=1
                         try:
-                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                            finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
-                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'skill_def':0}
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=4
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['skill_def']=round(char_of_2[f'team_player_{user_2_player}']['hp']*1/10)
+                            user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'skill_def':0}
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=4
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['skill_def']=round(char_of_2[f'team_player_{user_2_player}']['hp']*1/10)
                         cd[message_id]['passive']=user_passive
                     if char_of_2[f'team_player_{user_2_player}']['name']=='CLAUDIA':
                         text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
                         user_passive['user_2_pass']['amnt']+=1
                         try:
-                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                            finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
-                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'clau_dmg':0}
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=2
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['clau_dmg']=round(char_2_dmg*1/4.9)
+                            user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'clau_dmg':0}
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=2
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['clau_dmg']=round(char_2_dmg*1/4.9)
                         cd[message_id]['passive']=user_passive
                     if char_of_2[f'team_player_{user_2_player}']['name']=='FISCHL':
                         text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
                         user_passive['user_2_pass']['amnt']+=1
                         try:
-                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                            finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
-                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'fis_dmg':0}
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=5
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['fis_dmg']=char_2_dmg
+                            user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'fis_dmg':0}
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=5
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['fis_dmg']=char_2_dmg
                         cd[message_id]['passive']=user_passive
                     if char_of_2[f'team_player_{user_2_player}']['name']=='ECHO':
                         text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                         user_passive['user_2_pass']['amnt']+=1
                         try:
-                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                            finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
-                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                            user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0}
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=3
                         cd[message_id]['passive']=user_passive
                     if char_of_2[f'team_player_{user_2_player}']['name']=='QIQI':
                         text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                         user_passive['user_2_pass']['amnt']+=1
                         try:
-                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                            finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
-                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'qiqi_hp':0}
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['qiqi_hp']=char_of_2[f'team_player_{user_2_player}']['old_hp']
+                            user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'qiqi_hp':0}
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=3
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['qiqi_hp']=char_of_2[f'team_player_{user_2_player}']['old_hp']
                         cd[message_id]['passive']=user_passive
                     if char_of_2[f'team_player_{user_2_player}']['name']=='DIAN FARRELL':
                         text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                         user_passive['user_2_pass']['amnt']+=1
                         try:
-                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                            finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
-                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+2
+                            user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0}
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+2
                         cd[message_id]['passive']=user_passive
                     if char_of_2[f'team_player_{user_2_player}']['name']=='KAYLA':
                         text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                         user_passive['user_2_pass']['amnt']+=1
                         try:
-                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                            finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
-                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                            user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0}
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=3
                         cd[message_id]['passive']=user_passive
                     if char_of_2[f'team_player_{user_2_player}']['name']=='KLAUDIA VALENTZ':
                         text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                         user_passive['user_2_pass']['amnt']+=1
                         try:
-                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                            finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
-                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'klaudia_hp':0}
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['klaudia_hp']=round(char_of_2[f'team_player_{user_2_player}']['old_hp']/5)
+                            user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'klaudia_hp':0}
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=3
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['klaudia_hp']=round(char_of_2[f'team_player_{user_2_player}']['old_hp']/5)
                         cd[message_id]['passive']=user_passive
                     if char_of_2[f'team_player_{user_2_player}']['name']=='LISA':
                         text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                         user_passive['user_2_pass']['amnt']+=1
                         try:
-                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                            finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
-                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'area_dmg':0}
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['area_dmg']=round(char_2_dmg)
+                            user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'area_dmg':0}
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=3
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['area_dmg']=round(char_2_dmg)
                         cd[message_id]['passive']=user_passive
                     if char_of_2[f'team_player_{user_2_player}']['name']=='FIONA':
                         text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                         user_passive['user_2_pass']['amnt']+=1
                         try:
-                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                            finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
-                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                            user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0}
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=3
                         cd[message_id]['passive']=user_passive
                     if char_of_2[f'team_player_{user_2_player}']['name']=='YUKONG':
                         text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                         user_passive['user_2_pass']['amnt']+=1
                         try:
-                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                            finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
-                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=2
+                            user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0}
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=2
                         cd[message_id]['passive']=user_passive
                     if char_of_2[f'team_player_{user_2_player}']['name']=='LISA':
                         text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                         user_passive['user_2_pass']['amnt']+=1
                         try:
-                            finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                            finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
-                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'area_dmg':0}
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['area_dmg']=round(char_2_dmg)
+                            user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'area_dmg':0}
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=3
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['area_dmg']=round(char_2_dmg)
                         cd[message_id]['passive']=user_passive
                     if char_of_1[f'team_player_{user_1_player}']['hp']<1:
                         char_of_1[f'team_player_{user_1_player}']['dead']='True'
@@ -6204,11 +6204,11 @@ def passer_pvp(update,context):
                 if char_of_2[f'team_player_{user_2_player}']['name']=='BENNETT':
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'benny_fire':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=1
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['benny_fire']=round(char_2_dmg/5)
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'benny_fire':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=1
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['benny_fire']=round(char_2_dmg/5)
                     char_crit=[True,False]
                     char2_possible=random.choices(char_crit,weights=(char_of_2[f'team_player_{user_2_player}']['crit_rate'],100-char_of_2[f'team_player_{user_2_player}']['crit_rate']),k=1)
                     if char2_possible[0]==True:
@@ -6285,11 +6285,11 @@ def passer_pvp(update,context):
                 if char_of_2[f'team_player_{user_2_player}']['name']=='JEAN':
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'jean_dan':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=1
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['jean_dan']=round(char_2_dmg/5)
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'jean_dan':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=1
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['jean_dan']=round(char_2_dmg/5)
                     char_crit=[True,False]
                     char2_possible=random.choices(char_crit,weights=(char_of_2[f'team_player_{user_2_player}']['crit_rate'],100-char_of_2[f'team_player_{user_2_player}']['crit_rate']),k=1)
                     if char2_possible[0]==True:
@@ -6303,10 +6303,10 @@ def passer_pvp(update,context):
                 if char_of_2[f'team_player_{user_2_player}']['name']=='TIAN LANG':
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'tia_Speed':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['tia_Speed']=round(char_of_2[f'team_player_{user_2_player}']['speed']/2.5)
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'tia_Speed':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['tia_Speed']=round(char_of_2[f'team_player_{user_2_player}']['speed']/2.5)
                     char_crit=[True,False]
                     char2_possible=random.choices(char_crit,weights=(char_of_2[f'team_player_{user_2_player}']['crit_rate'],100-char_of_2[f'team_player_{user_2_player}']['crit_rate']),k=1)
                     if char2_possible[0]==True:
@@ -6320,19 +6320,19 @@ def passer_pvp(update,context):
                 if char_of_2[f'team_player_{user_2_player}']['name']=='RAIDEN SHOGUN':
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rai_den':0,'rounds':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rai_den']=round(char_2_dmg*2.5)
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=10
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rai_den':0,'rounds':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rai_den']=round(char_2_dmg*2.5)
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=10
                     text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
                 if char_of_2[f'team_player_{user_2_player}']['name']=='SEKIRO':
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=1
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=1
                     text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
                 if char_of_1[f'team_player_{user_1_player}']['hp']<1:
                     char_of_1[f'team_player_{user_1_player}']['dead']='True'
@@ -6401,134 +6401,134 @@ def passer_pvp(update,context):
                     text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=2
+                        user_passive['user_2_pass']['skill']["{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=2
                     cd[message_id]['passive']=user_passive
                 if char_of_2[f'team_player_{user_2_player}']['name']=='SHADOW ( BETA CHAR )':
                     text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=9999
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=9999
                     cd[message_id]['passive']=user_passive
                 if char_of_2[f'team_player_{user_2_player}']['name']=='MORAX ( BETA CHAR )':
                     text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'skill_def':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=4
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['skill_def']=round(char_of_2[f'team_player_{user_2_player}']['hp']*1/10)
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'skill_def':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=4
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['skill_def']=round(char_of_2[f'team_player_{user_2_player}']['hp']*1/10)
                     cd[message_id]['passive']=user_passive
                 if char_of_2[f'team_player_{user_2_player}']['name']=='CLAUDIA':
                     text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'clau_dmg':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=2
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['clau_dmg']=round(char_2_dmg*1/4.9)
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'clau_dmg':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=2
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['clau_dmg']=round(char_2_dmg*1/4.9)
                     cd[message_id]['passive']=user_passive
                 if char_of_2[f'team_player_{user_2_player}']['name']=='FISCHL':
                     text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*"
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'fis_dmg':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=5
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['fis_dmg']=char_2_dmg
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'fis_dmg':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=5
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['fis_dmg']=char_2_dmg
                     cd[message_id]['passive']=user_passive
                 if char_of_2[f'team_player_{user_2_player}']['name']=='ECHO':
                     text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=3
                     cd[message_id]['passive']=user_passive
                 if char_of_2[f'team_player_{user_2_player}']['name']=='QIQI':
                     text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'qiqi_hp':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['qiqi_hp']=char_of_2[f'team_player_{user_2_player}']['old_hp']
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'qiqi_hp':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=3
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['qiqi_hp']=char_of_2[f'team_player_{user_2_player}']['old_hp']
                     cd[message_id]['passive']=user_passive
                 if char_of_2[f'team_player_{user_2_player}']['name']=='DIAN FARRELL':
                     text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+2
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+2
                     cd[message_id]['passive']=user_passive
                 if char_of_2[f'team_player_{user_2_player}']['name']=='KAYLA':
                     text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=3
                     cd[message_id]['passive']=user_passive
                 if char_of_2[f'team_player_{user_2_player}']['name']=='KLAUDIA VALENTZ':
                     text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'klaudia_hp':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['klaudia_hp']=round(char_of_2[f'team_player_{user_2_player}']['old_hp']/5)
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'klaudia_hp':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=3
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['klaudia_hp']=round(char_of_2[f'team_player_{user_2_player}']['old_hp']/5)
                     cd[message_id]['passive']=user_passive
                 if char_of_2[f'team_player_{user_2_player}']['name']=='LISA':
                     text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'area_dmg':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['area_dmg']=round(char_2_dmg)
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'area_dmg':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=3
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['area_dmg']=round(char_2_dmg)
                     cd[message_id]['passive']=user_passive
                 if char_of_2[f'team_player_{user_2_player}']['name']=='FIONA':
                     text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=3
                     cd[message_id]['passive']=user_passive
                 if char_of_2[f'team_player_{user_2_player}']['name']=='YUKONG':
                     text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=2
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=2
                     cd[message_id]['passive']=user_passive
                 if char_of_2[f'team_player_{user_2_player}']['name']=='LISA':
                     text+=f"*{char_of_2[f'team_player_{user_2_player}']['name'] } USED {moves['skill_move']['name']}\n*" 
                     user_passive['user_2_pass']['amnt']+=1
                     try:
-                        finder=user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']
+                        finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                     except:
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'area_dmg':0}
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['rounds']+=3
-                    user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['area_dmg']=round(char_2_dmg)
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'area_dmg':0}
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=3
+                    user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['area_dmg']=round(char_2_dmg)
                     cd[message_id]['passive']=user_passive
                 if char_of_1[f'team_player_{user_1_player}']['hp']<1:
                     char_of_1[f'team_player_{user_1_player}']['dead']='True'
@@ -6827,7 +6827,7 @@ def trader(update,context):
     return
 
 def main():
-    updater = Updater(API_KEY,use_context=True)
+    updater =Updater(API_KEY,use_context=True)
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("start", start,run_async=True))
     dp.add_handler(CommandHandler("explore",explore_cmd,run_async=True))
