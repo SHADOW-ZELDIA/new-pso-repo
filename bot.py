@@ -5921,7 +5921,7 @@ def passer_pvp(update,context):
                         try:
                             finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
-                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'jean_dan':0}
+                            user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'jean_dan':0}
                         user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['rounds']+=1
                         user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['jean_dan']=round(char_2_dmg/5)
                         char_crit=[True,False]
@@ -5939,8 +5939,8 @@ def passer_pvp(update,context):
                         try:
                             finder=user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]
                         except:
-                            user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']={'rounds':0,'tia_Speed':0}
-                        user_passive['user_2_pass']['skill'][f'{char_of_2[f'team_player_{user_2_player}']['name']}']['tia_Speed']=round(char_of_2[f'team_player_{user_2_player}']['speed']/2.5)
+                            user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]={'rounds':0,'tia_Speed':0}
+                        user_passive['user_2_pass']['skill'][f"{char_of_2[f'team_player_{user_2_player}']['name']}"]['tia_Speed']=round(char_of_2[f'team_player_{user_2_player}']['speed']/2.5)
                         char_crit=[True,False]
                         char2_possible=random.choices(char_crit,weights=(char_of_2[f'team_player_{user_2_player}']['crit_rate'],100-char_of_2[f'team_player_{user_2_player}']['crit_rate']),k=1)
                         if char2_possible[0]==True:
