@@ -1,4 +1,4 @@
-API_KEY = '6759114451:AAGWHSxbJGZwP_a4OFrREL-eDVUGyXVYm0U'
+API_KEY = '6149996968:AAHjfT6t-6wxjUPgTGiPZqgkk9ZcOG3iOnA'
 uri = "mongodb+srv://shadow_userbot:1976abcd?@shadowbot.jcgbzsl.mongodb.net/?retryWrites=true&w=majority"
 from telegram import *
 from telegram.ext import *
